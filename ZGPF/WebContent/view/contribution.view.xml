@@ -1,0 +1,174 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZGPF.ZGPF.controller.contribution"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="GPF" showNavButton="true" navButtonPress="backpage">
+				<content>
+				
+						<f:SimpleForm title="Contribution" id="con" editable="true" layout="ResponsiveGridLayout"  breakpointL="1024" breakpointM="600"
+						breakpointXL="1440" labelSpanXL="4" labelSpanL="4" labelSpanM="2" labelSpanS="2" adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+						emptySpanM="1" emptySpanS="1" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"
+						visible="{= (${gpfmodel>/0/Zreqty} === 'C')}">
+							<f:content>
+								<core:Title text=""/>
+							  
+								<Label design="Bold" text="Employee Code"/>
+								<Input id="ec" value="{gpfmodel>/0/Pernr}" editable="false"/>
+								<Label design="Bold" text="Designation"/>
+								<Input id="des" value="{gpfmodel>/0/Designation}" editable="false"/>
+								<Label text="GPF NO" design="Bold"/>
+								<Input id="gfno" value="{gpfmodel>/0/Gpfno}" editable="false"/>
+								
+								
+								<Label design="Bold" text="Start Date" required="{= ${gpfmodel>/0/Action} === 'S' || ${gpfmodel>/0/Zreqty} === 'C' }"/>
+								
+							
+							<DatePicker  id="sd" 
+								 editable="{=  ${gpfmodel>/0/Action} === ''}" 
+								 
+								 
+								  value="{path:'gpfmodel>/0/Begda',type:'sap.ui.model.type.DateTime',
+								formatOptions:{
+								pattern:'yyyy/MM/dd'
+								}
+								}"/>
+							
+						
+							
+							
+							
+									<core:Title text=""/>
+										<Label design="Bold" text="Name"/>
+								<Input id="name" value="{gpfmodel>/0/Name}" editable="false"/>
+								<Label design="Bold" text="Office"/>
+								<Input id="of" value="{gpfmodel>/0/Office}" editable="false"/>
+								<Label text="PayScale" design="Bold"/>
+								<Input id="ps" value="{gpfmodel>/0/Payscale}" editable="false"/>
+								
+								
+									<Label design="Bold" text="End Date" required="{= ${gpfmodel>/0/Action} === 'S' || ${gpfmodel>/0/Zreqty} === 'C' }"/>
+								
+								<DatePicker  id="ed"    editable="{=  ${gpfmodel>/0/Action} === ''}"
+								value="{path:'gpfmodel>/0/Endda',type:'sap.ui.model.type.DateTime',
+								formatOptions:{
+								pattern:'yyyy/MM/dd'
+								}
+								}"/>
+								
+							
+								
+							
+								<Label text="Contribution Amount" design="Bold" required="{= ${gpfmodel>/0/Action} === 'S' || ${gpfmodel>/0/Zreqty} === 'C' }"/>
+								<Input id="creqamt" editable="{=  ${gpfmodel>/0/Action} === ''}" value="{gpfmodel>/0/ConAmt}" />
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm title="Advance/Withdrawl" id="adv" editable="true" layout="ResponsiveGridLayout"  breakpointL="1024" breakpointM="600"
+						breakpointXL="1440" labelSpanXL="4" labelSpanL="4" labelSpanM="2" labelSpanS="2" adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+						emptySpanM="1" emptySpanS="1" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false" 
+						visible="{= (${gpfmodel>/0/Zreqty} === 'A')}">
+							<f:content>
+								<core:Title text=""/>
+								<Label design="Bold" text="Request Type" required="true"/>
+											<ComboBox
+					editable="{= ${gpfmodel>/0/Action} === ''}" visible="{= ${gpfmodel>/0/Zreqty} === 'A' }"
+					width="60%" id="reqtypea" 
+				items="{
+					 path:'/reqtype1',
+					 templateShareable:false
+					 }" selectionChange="RequestType" selectedKey="{gpfmodel>/0/Rtext}">
+				<core:Item  text="{type}"  key="{type}"/>
+					</ComboBox> 
+								<Label design="Bold" text="Employee Code"/>
+								<Input id="eca" value="{gpfmodel>/0/Pernr}" editable="false"/>
+								<Label design="Bold" text="Designation"/>
+								<Input id="desa" value="{gpfmodel>/0/Designation}" editable="false"/>
+								<Label text="GPF NO" design="Bold"/>
+								<Input id="gfnoa" value="{gpfmodel>/0/Gpfno}" editable="false"/>
+								
+								<Label design="Bold" text="Name"/>
+								<Input id="namea" value="{gpfmodel>/0/Name}" editable="false"/>
+								<Label design="Bold" text="Office"/>
+								<Input id="ofa" value="{gpfmodel>/0/Office}" editable="false"/>
+								<core:Title text=""/>
+								<Label text="PayScale" design="Bold"/>
+								<Input id="psa" value="{gpfmodel>/0/Payscale}" editable="false"/>
+								
+								<Label design="Bold" text="GPF Balance"/>
+								<Input value="{gpfmodel>/0/GpfBalance}" editable="false"/>
+									<Label text="Eligible Amount For Withdrawal" design="Bold"/>
+								<Input value=" {gpfmodel>/0/EliAmt}" editable="false"/>
+							
+								<Label design="Bold" text="Requested Amount" required="{= ${gpfmodel>/0/Zreqty} === 'A'}"/>
+								<Input value="{gpfmodel>/0/ReqAmt}" editable="{= ${gpfmodel>/0/Action} === ''}" id="reqamt"/>
+					
+								
+							
+								
+								<Label text="Requesters Comments" design="Bold" required="{= ${gpfmodel>/0/Zreqty} === 'A'}"/>
+								<TextArea id="ecom" rows="3" value="{gpfmodel>/0/EmpComm}" editable="{= ${gpfmodel>/0/Action} === ''}"/>
+							
+								
+							
+								
+							</f:content>
+					</f:SimpleForm>
+						
+			            	
+			<f:SimpleForm title="Approvers" id="app" editable="true" layout="ResponsiveGridLayout"
+			visible="{= ${gpfmodel>/0/Status} !== '' }">
+							<f:content>
+								
+								
+							
+							
+								<Label design="Bold" text="Sanction Amount"/>
+								<Input id="sa" width="50%" value="{gpfmodel>/0/SanAmt}" editable="false" 
+								visible="{= ${gpfmodel>/0/Status} !== '' }"/>
+								
+							    
+								
+								
+								
+								<Label design="Bold" text="Approvers Comments"/>
+								<TextArea rows="3" id="A1" width="50%" value="{gpfmodel>/0/A1Comm}" 
+								editable="false" visible="{= ${gpfmodel>/0/Status} !== '' }" />
+						
+							    
+							    <Label design="Bold" text="Comments" />
+								<TextArea rows="3" id="A2" width="50%" value="{gpfmodel>/0/A2Comm}"
+								editable="false"  visible="{= ${gpfmodel>/0/Status} !== '' }"/>
+							    
+							    
+							    
+							     
+							     <Label design="Bold" text="Next Level Approvers" />
+							     <Input id="nla" showValueHelp="true" width="50%"
+							     valueHelpRequest="nextlevelapprovers" liveChange="onsuggest_plant"
+							     editable="false" visible="{= ${gpfmodel>/0/Status} !== '' }" value="{gpfmodel>/0/Mpernr}"/>
+							
+								 <Label design="Bold" text="Paid Amount" 
+								  id="pdl"/>
+								<Input width="50%" value="{gpfmodel>/0/PaidAmt}" id="pa"
+								editable="false"   visible="{= ${gpfmodel>/0/Status} !== '' }"/>
+								
+								
+								
+								 
+								
+							</f:content>
+						</f:SimpleForm>
+					
+	
+				</content>
+					<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<!-- <Button text="Save" type="Emphasized" press="Save" visible="{= ${gpfmodel>/0/Action} !== 'T'}"/> -->
+						<Button text="Submit" type="Emphasized" press="Submit" visible="{=  ${gpfmodel>/0/Action} === ''}"/>
+						
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

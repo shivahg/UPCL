@@ -1,0 +1,84 @@
+<mvc:View controllerName="ZGPF.ZGPF.controller.dashboard" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+xmlns:tnt="sap.tnt">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="GPF" >
+				<tnt:ToolHeader design="Auto"  width="180%">
+					
+						<Label 
+							text="GPF Dash Board"></Label> 
+					</tnt:ToolHeader>
+					<content>
+						<Table id="dashboard" items="{dashboard>/}" insent="true" growing="true"
+						sticky="ColumnHeaders">
+							<headerToolbar>
+								<OverflowToolbar >
+										<Label design="Bold"  text="Items ({= ${dashboard>/}.length})"></Label> 
+				                  <ToolbarSpacer/>
+					<SearchField id="search" liveChange="onSearch" width="30%" />
+										
+								</OverflowToolbar>
+							</headerToolbar>
+					<columns>
+						<Column width="20%" hAlign="Center">
+							<Label text="Request Number" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text=" Request Type" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text="Date" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text="Contribution Amount" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text="Request Amount" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text="Status" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text="Manager Name" design="Bold"/>
+						</Column>
+							<!-- <Column hAlign="Center">
+							<Label text="Employee Name" design="Bold"/>
+						</Column> -->
+						
+							
+							
+						
+						
+							
+						
+							</columns>
+						<items>
+						<ColumnListItem>
+							<Button text="{dashboard>Zreqno}" width="40%" type="Emphasized" press="reqnopress"/>
+							<!-- <Text text="{dashboard>Name}"/> -->
+							<Text text="{dashboard>Rtext}"/>
+							<Text text="{dashboard>Cdate}"/>
+							<Text text="{dashboard>ConAmt}"/>
+							<Text text="{dashboard>ReqAmt}"/>
+							<Text text="{dashboard>Status}"/>
+							<Text text="{dashboard>Mname}"/>
+							
+						</ColumnListItem>
+						</items>
+				
+				</Table>
+					</content>
+					<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button text="Contribution" type="Emphasized" press="Contribution"/>
+							<Button text="Advance/Withdrawal" type="Emphasized" press="Advance"/>
+						
+					</OverflowToolbar>
+				</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

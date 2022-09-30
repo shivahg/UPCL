@@ -1,0 +1,12 @@
+.sapUiSizeCompact .sapMColumnHeader {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: burlywood;
+}
+.sapUiSizeCompact .sapMTB.sapMTBHeader-CTX {
+    height: 3rem;
+    background-color: #bfd1cd;
+}
+.sapUiSizeCompact .sapMListTblHeaderCell:nth-last-child(2) {
+    padding-right: 0rem;
+}
