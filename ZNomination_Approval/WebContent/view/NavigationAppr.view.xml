@@ -1,0 +1,69 @@
+<mvc:View
+    controllerName="ZANOC.zemployeeapprovenoc.controller.NavigationAppr"
+    xmlns:c="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:t="sap.ui.table"
+	xmlns:tnt="sap.tnt" height="100%"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<customHeader>
+						<Toolbar class="mainToolbar">
+							<Button icon="sap-icon://menu2" text="Nomination Approval" tooltip="Menu" press="menuButtonPress"/>
+							
+							<!--<Image src="https://www.vhv.rs/dpng/d/170-1709699_download-logo-scania-png-clipart-png-download-logo.png" />-->
+							
+							<ToolbarSpacer/>
+							<!-- <Button icon="sap-icon://bell" tooltip="Notification" press="fnNotification" text="" /> -->
+							<!--<HBox>
+								<Button icon="sap-icon://customer" tooltip="Profile" text="" visible="false" press="fnProfileMenu" ariaHasPopup="Dialog"/>
+								<Avatar src="" visible="true" displaySize="XS" press=".fnProfileMenu" />
+							</HBox>-->
+						<!-- 	<Avatar src="https://he-s3.s3.amazonaws.com/media/avatars/runalenka4/resized/180/photo.jpg" visible="true" displaySize="XS" press=".fnProfileMenu" /> -->
+						<!-- <Title text="Welcome, {settings>/User/Ename}"/> -->
+						<!-- <Button icon="sap-icon://customer" text="{settings>/User/Ename}" press=".fnProfileMenu" /> -->
+						<!--	type="Transparent"-->
+						<Button icon="sap-icon://customer" text="{settings>/User/Ename}" press=".fnProfileMenu" />
+						</Toolbar>
+					</customHeader>
+					<content>
+						<HBox width="100%" height="100%" class="sideNavHbox containerHBox">
+							<tnt:SideNavigation id="sidenav" expanded="{settings>/SideNavigation}" height="100%" class="sideNavigation">
+					
+								
+									<tnt:NavigationList>
+										<tnt:NavigationListItem text="Nominee" icon="sap-icon://employee" select="navtoDashboard" key="property"/>
+									</tnt:NavigationList>
+							<tnt:fixedItem>
+									<tnt:NavigationList>
+										<tnt:NavigationListItem text="Welcome {settings>/User/Ename}" icon="sap-icon://customer" select=".fnProfileMenu" enabled="false"/>
+									</tnt:NavigationList>
+								</tnt:fixedItem>
+							</tnt:SideNavigation>
+							<NavContainer id="Main" defaultTransitionName="slide">
+					
+                                	
+							</NavContainer>
+						</HBox>
+					</content>
+                       <footer>
+					 
+					<OverflowToolbar>
+                   
+						<ToolbarSpacer />
+						  <Button  visible="true"
+							text="ReferBack" type="Emphasized" press="ReferBack" id="R"></Button>
+						<Button  visible="true"
+							text="Approve"  press="onApprove" id="B1"></Button>
+						<Button type="Emphasized" 
+							text="Reject" press="onReject" id="B2"></Button>
+                            	</OverflowToolbar>
+				</footer>    
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

@@ -1,0 +1,248 @@
+<mvc:View
+    controllerName="ZANOC.zemployeeapprovenoc.controller.Empdetailsappr"
+    xmlns:c="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:t="sap.ui.table"
+	xmlns:tnt="sap.tnt" height="100%"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Shell id="shell">
+		<App>
+			<pages>
+				<Page id="page" title="Nomination Approval" class="mainUi" showNavButton="true" navButtonPress="navtoDashboard">
+					
+						<content>
+                        
+                        	    <Panel id="p2" visible="true" backgroundDesign="Translucent" class="panelPaddingRemove"
+						headerText="">
+						<OverflowToolbar id="attachmentSec">
+							<core:Icon src="sap-icon://request" size="23px"
+								color="#0a6ed1"></core:Icon>
+							<Text text="#Request: {dashboard>/Single_Record/ReqNo}" />
+							<tnt:InfoLabel
+								text="{
+												parts: [
+													{path: 'dashboard>/Single_Record/Status'}
+												],
+												formatter: '.statusText'
+											}"
+								displayOnly="true"
+								colorScheme="{
+												parts: [
+													{path: 'dashboard>/Single_Record/Status'}
+												],
+												formatter: '.statusColor'
+											}" />
+							<ToolbarSpacer />
+							<Label text="Attachment For: " design="Bold"
+								visible="{dashboard>/isEditable}" />
+							<ComboBox
+									width="160px"
+									wrapItemsText="true"
+									visible="{dashboard>/isEditable}"
+									items="{dashboard>/UploadList}" id="idAttachFor">
+								<core:Item text="{dashboard>uploadType}" />
+							</ComboBox>
+							<u:FileUploader id="fileUploader"
+								name="myFileUpload" uploadUrl="FileSet/"
+								tooltip="Upload your file to the local server"
+								uploadComplete="handleUploadComplete" change="handleValueChange"
+								typeMissmatch="handleTypeMissmatch" style="Emphasized"
+								placeholder="Choose a file for Upload..."
+								visible="{dashboard>/isEditable}" fileType="pdf,jpg,png,jpeg" >
+								<u:parameters>
+									<u:FileUploaderParameter
+										name="Accept-CH" value="Viewport-Width" />
+									<u:FileUploaderParameter
+										name="Accept-CH" value="Width" />
+									<u:FileUploaderParameter
+										name="Accept-CH-Lifetime" value="86400" />
+								</u:parameters>
+							</u:FileUploader>
+							<Button text="Upload File" press="handleUploadPress"
+								visible="{dashboard>/isEditable}" />
+							<Button icon="sap-icon://pdf-attachment" visible="{= ${dashboard>/Single_Record/Status} ? true : false}"
+								press="fnPdfDownload" ></Button>
+							<Button icon="sap-icon://message-popup"
+								press="fnShowNotification" id="B5"></Button>
+						</OverflowToolbar>
+						<IconTabBar id="idicon" expanded="true"
+							class="sapUiResponsiveContentPadding" select="onselect">
+							<items>
+								<IconTabFilter key="notes"
+									icon="sap-icon://create-form" iconColor="Positive">
+										<form:SimpleForm class="nocClass"
+											editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+											labelSpanL="4" labelSpanM="4" labelSpanS="12"
+											adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+											emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2"
+											columnsM="2" singleContainerFullSize="false" id="personInfo"
+											title="Personal Information">
+											<form:content>
+												<c:Title text="" />
+												<Label text="Employee Name" />
+												<Text editable="false"
+													text="{dashboard>/Single_Record/Ename}" />
+												<Label text="Designation" />
+												<Text editable="false"
+													text="{dashboard>/Single_Record/Stext}" />
+
+												<c:Title text="" />
+												<Label text="Employee Id"/>
+												<Text editable="false"
+													text="{dashboard>/Single_Record/EmpId}" />
+												<Label text="Place of Posting" />
+												<Text editable="false"
+													text="{dashboard>/User/Orgtx} ({dashboard>/Single_Record/Werks})" />
+											</form:content>
+										</form:SimpleForm>
+
+                                        <OverflowToolbar >
+                                        <html:h2>NOC Details</html:h2>
+                                        <ToolbarSpacer/>
+                                        <Label text="Benifit Type"/>
+                                        <ComboBox id="idPbenifitype"
+													selectionChange="BenifitType" change="BenifitType"
+													selectedKey="{dashboard>/Single_Record/PropCat}"
+													items="{dashboard>/PropCat}"
+													editable="{dashboard>/isEditable}" >
+													<c:ListItem text="Movable" />
+													<c:ListItem text="Immovable" />
+													<c:ListItem key="{dashboard>ConfigId}"
+														text="{dashboard>ConfigValue}" />
+												</ComboBox>
+                                                
+                                        </OverflowToolbar>
+                                        <Table id="tbbenifittype"
+										items="">
+										<columns>
+											<Column class="dashboard">
+												<Label text="Nominee" wrapping="true"/>
+											</Column>
+											<Column>
+												<Label text="Nominee's Address" wrapping="true"/>
+											</Column>
+											<Column>
+												<Label text="Relation" wrapping="true"/>
+											</Column>
+
+											<Column>
+												<Label text="Birth Date" wrapping="true"/>
+											</Column>
+											<Column class="Content">
+												<Label text="Share" wrapping="true"/>
+											</Column>
+
+                                            <Column class="dashboard">
+												<Label text="Guardian's Address" wrapping="true" />
+											</Column>
+											<Column>
+												<Label text="PAN NO" wrapping="true"/>
+											</Column>
+											<Column>
+												<Label text="Aadhar No" wrapping="true"/>
+											</Column>
+
+											<Column class="" width="60px">
+												<Label text="Bank Name" wrapping="true"/>
+											</Column>
+											<Column class="Content" width="60px">
+												<Label text="IFSC" wrapping="true"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Navigation"
+												press="onfilePress" class="dashbord">
+												<Text text="Yogesh Devadiga" />
+												<Text text="Bangalore" />
+												<Text text="Brother"/>
+													<HBox class="tableDate">
+								<c:Icon src="sap-icon://appointment-2" color="{ parts: [ {path: 'dashboard>Status'} ], formatter: '.dateIconColor' }"/>
+						   		<Text text="10/2/2021"/>
+							</HBox>	
+                            <Text text="50%"/>
+                            <Text text="Kolar KGF"/>
+                            <Text text="xxxxxxxxxxxx105"/>
+                            <Text text="10678797798798"/>
+                            <Text text="SBI"/>
+                            <Text text="IFSC000787987"/>
+												
+											</ColumnListItem>
+										</items>
+
+									</Table>
+
+
+
+
+
+										
+								</IconTabFilter>
+								<IconTabSeparator icon="sap-icon://process" />
+								<IconTabFilter key="people"
+									icon="sap-icon://attachment" design="Horizontal"
+									text="Attachments">
+
+									<Table id="dashboardid"
+										items="{dashboard>/UploadedAttachment}" class="dashboard">
+										<columns>
+											<Column class="dashboard">
+												<Label text="File Name" />
+											</Column>
+											<Column>
+												<Label text="File For" />
+											</Column>
+											<Column>
+												<Label text="Uploaded Date" />
+											</Column>
+
+											<Column class="" width="60px">
+												<Label text="" />
+											</Column>
+											<Column class="Content" width="60px">
+												<Label text="" />
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Navigation"
+												press="onfilePress" class="dashbord">
+												<Text text="{dashboard>Filename}" />
+												<Text text="{dashboard>Type}" />
+												<HBox class="dateCss"
+													visible="{= !${dashboard>isCreated}}">
+													<core:Icon src="sap-icon://appointment-2"
+														color="#3181c7" />
+													<Text text="{dashboard>Datestamp}" />
+												</HBox>
+												<core:Icon
+													src="{
+												parts: [
+													{path: 'dashboard>Filename'}
+												],
+												formatter: '.fnSetIcon'
+											}"
+													color="{
+												parts: [
+													{path: 'dashboard>Filename'}
+												],
+												formatter: '.fnSetIconColor'
+											}"
+													size="21px"></core:Icon>
+												<Button icon="sap-icon://delete"
+													visible="{dashboard>isCreated}" press="onFileDelete"
+													type="Transparent"></Button>
+											</ColumnListItem>
+										</items>
+
+									</Table>
+								</IconTabFilter>
+							</items>
+						</IconTabBar>
+					</Panel>
+
+							</content>    
+					
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

@@ -1,0 +1,91 @@
+<mvc:View
+    controllerName="ZANOC.zemployeeapprovenoc.controller.Dashboard"
+    xmlns:c="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:t="sap.ui.table"
+	xmlns:tnt="sap.tnt" height="100%"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Shell id="shell">
+		<App>
+			<pages>
+				<Page id="page" title="Nomination Approval" class="mainUi">
+					
+						<content>
+                        
+                        	    
+								<Panel id="p1" backgroundDesign="Translucent" visible="true" class="panelPaddingRemove"
+						headerText="">
+						
+						
+						<Table id="idtable1" 
+						growing="true" sticky="HeaderToolbar,ColumnHeaders">
+							<headerToolbar>
+								<OverflowToolbar >
+										<Label design="Bold"  text="Request Overview (Property) ({= ${dashboard>/NOC_Record}.length})"></Label>
+				                  <ToolbarSpacer/>
+									<SearchField id="search" liveChange="onSearch" width="30%" />
+									<Button icon="sap-icon://synchronize"
+										press="getBackenddata" type="Transparent" />
+										
+								</OverflowToolbar>
+							</headerToolbar>
+					<columns>
+						<Column  hAlign="Left">
+							<Label text="Request Number" design="Bold"/>
+						</Column>
+						<Column hAlign="Left" demandPopin="true" minScreenWidth="Tablet">
+							<Label text="Request Date" design="Bold"/>
+						</Column>
+						<Column  hAlign="Left" demandPopin="true" minScreenWidth="Tablet">
+							<Label text="Category" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text="Status" design="Bold"/>
+						</Column>
+						
+						<Column hAlign="Left" width="35px">
+							<Label text="" design="Bold"/>
+						</Column>
+						
+						
+						
+							</columns>
+						<items>
+						<ColumnListItem>
+							<Link  text="998989078678" press="fnLinkPress"/>
+							<HBox class="tableDate">
+								<c:Icon src="sap-icon://appointment-2" color="{ parts: [ {path: 'dashboard>Status'} ], formatter: '.dateIconColor' }"/>
+						   		<Text text="{dashboard>ChangedOn}"/>
+							</HBox>	
+							<HBox class="tableDate">
+								<c:Icon src="{= ${dashboard>PropCat} === 'IMV' ? 'sap-icon://functional-location' : 'sap-icon://shipping-status'}"/>
+						   		<Text wrapping="true" text="{ parts: [ {path: 'dashboard>PropCat'} ], formatter: '.fnPropCatFormatter' }" />
+							</HBox>	
+							<tnt:InfoLabel text="{ parts: [ {path: 'dashboard>Status'} ], formatter: '.statusText' }"
+											displayOnly="true"
+											colorScheme="{ parts: [ {path: 'dashboard>Status'} ], formatter: '.statusColor' }"
+											icon="{ parts: [ {path: 'dashboard>Status'} ], formatter: '.statusIcon' }" />						
+						
+				
+							 <c:Icon src="sap-icon://edit" press=".fnLinkPress"
+											type="Transparent"
+											visible="{
+												parts: [
+													{path: 'dashboard>Status'}
+												],
+												formatter: '.showEditButton'
+											}" />
+							
+						</ColumnListItem>
+						</items>
+				
+				</Table>
+					</Panel>
+                       </content>
+                         
+					
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

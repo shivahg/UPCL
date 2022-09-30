@@ -1,0 +1,114 @@
+/* Enter your custom styles here */
+/* Enter your custom styles here */
+.pdfDialog iframe{
+    width:100% !important;
+}
+.dateCss>div:nth-child(1){
+	padding-right: 5px;
+	    margin-top: -1px;
+}
+.panelPaddingRemove>div:nth-child(1){
+	padding:0px !important;
+	height:100%;
+}
+.nocClass .sapUiFormM .sapUiFormContainerTitle>.sapUiFormTitle{
+	height: 0rem !important;
+    line-height: 0rem !important;
+}
+.disclaimerCss{
+	width: 75%;
+    font-style: italic;
+    font-size: 13px;
+}
+.idPropCat{
+	width:100% !important;
+}
+.stepDialog{
+	padding:10px;
+}
+.tableDate>div:nth-child(1){
+	margin-right:5px;
+}
+.stepDialog>div:nth-child(1){
+	margin-right: 16px;
+    margin-top: 8px;
+}
+.reqtype{
+	font-weight: bold;
+    color: #0d5ba8;
+}
+/* Extended standard CSS */
+.sapMListTblSubCntRow {
+    overflow: hidden;
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    margin-top: 0px !important;
+    margin: auto;
+}
+
+.sapMShellCentralBox {
+    width: 100% !important;
+    left: 0px !important;
+    margin-left: 0px !important;
+}
+.SeamTitle .sapMBtnContent {
+    /*color: #ffffff;*/
+    font-size: 18px;
+}
+.sideNavHbox>div:nth-child(1)>div{
+	height:calc(100% - -0.5rem);
+}
+.sideNavHbox{
+	background-image: url(https://2.bp.blogspot.com/-xrnVGc0L2PA/VaoQB_wpeTI/AAAAAAAAA5w/par0Nh7lZak/w1200-h630-p-k-no-nu/sapfioriclient.png);
+	background-repeat: no-repeat;
+    background-size: cover;
+}
+.profileDetailVBox>div:nth-child(1){
+	margin:auto;
+}
+.mainToolbar{
+	background:#354A5F !important;
+}
+.mainToolbar bdi, .mainToolbar span{
+	color:#7abde3;
+	text-shadow: none;
+}
+.dialogSideScreen .sapMTitle{
+	width: 100%;
+    text-align: center;
+    padding-top: 2%;
+}
+.sideNavigation {
+    height: 100%;
+    /* position:absolute; */
+    z-index: 1;
+}
+.containerHBox>div:nth-child(2) {
+    width: 100% !important;
+    height: calc(100% - 2.5rem) !important;
+    /* padding-left: 47px; */
+}
+@media only screen and (min-width: 801px){
+	/*.dialogSideScreen.sapMDialog.sapMDialogStretched{
+		 right: 0px !important;
+		left: inherit !important;&nbsp;
+		max-height: calc(100% - 2rem - 6%) !important;
+		 top: 0px !important;
+		bottom:0px !important;&nbsp;
+		min-width: 30% !important;
+		max-height: 100% !important;
+	}
+	.dialogSideScreen .dialogbarClass{
+		top:-40px;
+	} */
+	.dialogSideScreen.sapMDialog.sapMDialogStretched{
+		width:30% !important;
+		margin:auto;
+	}
+}
+@media only screen and (max-width: 800px){
+	.dialogSideScreen{
+		
+	}
+}
