@@ -1,0 +1,166 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Zmedical_Approval.Zmedical_Approval.controller.medical_detail" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="Medical Details" showNavButton="true" navButtonPress="backpage">
+				<content>
+				<Panel id="1">
+					<f:SimpleForm title="Medical Details" id="con" editable="true" layout="ResponsiveGridLayout" breakpointL="1024" breakpointM="600"
+						breakpointXL="1440" labelSpanXL="4" labelSpanL="4" labelSpanM="2" labelSpanS="2" adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+						emptySpanM="1" emptySpanS="1" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+						<f:content>
+							<core:Title text=""/>
+						
+							<Label design="Bold" text="Reimbursement Type"/>
+							<ComboBox  id="rbtype" visible="{= ${medicalmodel>/0/Zreqtyp}!=='5'}"
+								items="{ path:'/data', templateShareable:false }" selectedKey="{medicalmodel>/0/Reimtype}"    selectionChange="Reimbursement_change"
+								editable="false" value="{medicalmodel>/0/Reimtype}">
+								<core:Item text="{type2}" key="{type2}" />
+							</ComboBox>
+							<Label design="Bold" text="Claim Type" required="true"/>
+							<ComboBox  id="cltype" visible="{= ${medicalmodel>/0/Zreqtyp}==='5'}"
+								items="{ path:'/data', templateShareable:false }" selectedKey="{medicalmodel>/0/Claimtype}"
+								editable="{=${medicalmodel>/0/Action} === 'S'|| ${medicalmodel>/0/Action} === ''}" value="{medicalmodel>/0/Claimtype}">
+								<core:Item text="{type4}" key="{type4}" />
+							</ComboBox>
+							<Label design="Bold" text="Employee Code No" />
+							<Input id="ecno" value="{medicalmodel>/0/Pernr}" editable="false"/>
+							<Label design="Bold" text="Health Card No"/>
+							<Input id="hcno" value="{medicalmodel>/0/Hcard}" editable="false"/>
+							<Label text="Patient Details" design="Bold" />
+							<Input id="pd" valueHelpRequest="patientdetails" showValueHelp="true"
+							value="{medicalmodel>/0/Patient}"  editable="false"/>
+							<Label design="Bold" text="Hospital Location"/>
+							<ComboBox editable="false" id="hloc"
+								items="{ path:'/data', templateShareable:false }" selectedKey="{medicalservice>/0/HospitalLoc}"
+								selectionChange="location_change" value="{medicalmodel>/0/HospitalLoc}">
+								<core:Item text="{type}" key="{type}"/>
+							</ComboBox>
+							<Label design="Bold" text="Medical Permission Number" />
+							<Input id="mpno" value="{medicalmodel>/0/Mreqno}" editable="false"
+							 valueHelpRequest="medical_pno" showValueHelp="true"    visible="false"/>
+							<Label design="Bold" text="Name Of Hospital/Address of Hospital"/>
+							<Input id="addhos" value="{medicalmodel>/0/Hospital}" showValueHelp="true" valueHelpRequest="Address"
+							editable="false"/>
+							<Label text="PayScale" design="Bold"/>
+							<Input id="paysc" value="{medicalmodel>/0/Payscale}" editable="false"
+							visible="{= ${medicalmodel>/0/Zreqtyp}!=='5'}"/>
+							
+							
+							
+							<core:Title text=""/>
+							<Label design="Bold" text="Employee Name"/>
+							<Input id="ename" value="{medicalmodel>/0/Name}" editable="false"/>
+							
+			                 <Label text="Date" design="Bold"/> 
+							<DatePicker id="cdate" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+								value="{path:'medicalmodel>/0/Cdate',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"/>
+							
+							
+							<Label design="Bold" text="Name Of Disease"/>
+							<Input id="ndise" value="{medicalmodel>/0/Desease}" editable="false"/>
+							
+							
+							<Label text="Estimated Date of Hospitalization" design="Bold"/> 
+							<DatePicker id="estimatedate" editable="false" visible="{= ${medicalmodel>/0/Zreqtyp}==='1'}"
+								value="{path:'medicalmodel>/0/Esthospdate',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"/>
+							
+							<Label design="Bold" text="Estimated Amount"/>
+							<Input id="estamt" value="{medicalmodel>/0/Estamount}" editable="false"
+							visible="{= ${medicalmodel>/0/Zreqtyp}==='1'}"/>
+							
+							<Label text=" Date of Admission" design="Bold"/> 
+							<DatePicker id="dad" editable="false"
+								value="{path:'medicalmodel>/0/Doadmin',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"
+								visible="{= ${medicalmodel>/0/Zreqtyp}==='2' || ${medicalmodel>/0/Zreqtyp}==='3'}"/>
+							
+							<Label text=" Date of Discharge" design="Bold"/> 
+							<DatePicker id="ddis" editable="false"
+								value="{path:'medicalmodel>/0/Dodisch',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"
+								visible="{= ${medicalmodel>/0/Zreqtyp}==='2' || ${medicalmodel>/0/Zreqtyp}==='3'}"/>
+							
+							<Label design="Bold" text="Details of Medical Advance"/>
+							<Input id="mdv" value="{medicalmodel>/0/Mreqno}" editable="false"
+							visible="{= ${medicalmodel>/0/Zreqtyp}==='2'}"/>
+							
+							<Link id="mreq" text="{medicalmodel>/0/Mreqno}" press="handleLinkPress" visible="{= ${medicalmodel>/0/Zreqtyp}==='2' }"/>
+							
+							<Label design="Bold" text="Total Amount Claimed"/>
+							<Input id="tamt" value="{medicalmodel>/0/Estamount}" editable="false"
+							visible="{= ${medicalmodel>/0/Zreqtyp}==='2' || ${medicalmodel>/0/Zreqtyp}==='3'}"/>
+							
+				           <Label design="Bold" text="Wheather Prior Permission was Taken For Treatment
+				           if Required"/>
+							<ComboBox  id="wppt"
+								items="{ path:'/data', templateShareable:false }" selectedKey="{medicalmodel>/0/Preper}"  visible="{= ${medicalmodel>/0/Zreqtyp}==='2' || ${medicalmodel>/0/Zreqtyp}==='3'}"
+								editable="false" value="{medicalmodel>/0/Preper}">
+								<core:Item text="{type3}" key="{type3}" />
+							</ComboBox>
+							
+							
+							
+							<Label design="Bold" text="Employee Comment" required="true"/>
+							<TextArea rows="3" id="ecom" value="{medicalmodel>/0/Empcomm}" editable="false"/>
+						</f:content>
+					</f:SimpleForm>
+					</Panel>
+					<f:SimpleForm title="Approvers" id="app" editable="true" layout="ResponsiveGridLayout"
+					visible="true">
+							<f:content>
+								
+								
+							
+							
+								<Label design="Bold" text="Sanction Amount" required="true"/>
+								<Input id="sa" width="50%" value="{medicalmodel>/0/Sancamt}" editable="{= ${medicalmodel>/0/Onlydisplay} !== 'X'}" />
+								
+							    
+								
+								
+								
+								<Label design="Bold" text="Approvers Comments" required="true"/>
+								<TextArea rows="3" id="A1" width="50%" value="{medicalmodel>/0/Mcomments}" 
+								editable="{= ${medicalmodel>/0/Onlydisplay} !== 'X'}"/>
+								
+								<Label design="Bold" text="Final Approvers Comments"/>
+								<TextArea rows="3" id="A2" width="50%" value="{medicalmodel>/0/Facomments}"
+								  editable="false"/>
+								 
+								
+								<Label design="Bold" text="Is It last level"/>
+							     <CheckBox id="ll" select="lastlevel" editable="{= ${medicalmodel>/0/Onlydisplay} !== 'X'}"/>
+							     
+							     <Label design="Bold" text="Next Level Approvers" required="true" />
+							     <Input id="nlaa" showValueHelp="true" width="50%"
+							     valueHelpRequest="nextlevelapprovers" liveChange="onsuggest_plant"
+							     editable="{= ${medicalmodel>/0/Onlydisplay} !== 'X'}" value="{medicalmodel>/0/Mpernr}" />
+							
+								<Label design="Bold" text="Pass Amount" required="true"/>
+								<Input id="paa" visible="false" width="50%" value="{medicalmodel>/0/Passamt}" 
+								editable="{= ${medicalmodel>/0/Onlydisplay} !== 'X'}" />
+								
+								
+								
+						
+							   
+							     
+								 
+								
+							</f:content>
+						</f:SimpleForm>
+			
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button text="Refer Back" type="Emphasized" press="ReferBack" visible="{=${medicalmodel>/0/Onlydisplay} !== 'X'}"/>
+						<Button text="Approve" type="Success" press="Approve" visible="{= ${medicalmodel>/0/Onlydisplay} !== 'X'}"/>
+						
+						<Button text="Reject" type="Reject" press="Reject" visible="{=${medicalmodel>/0/Onlydisplay} !== 'X'}" />
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
