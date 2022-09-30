@@ -1,0 +1,61 @@
+<mvc:View
+    controllerName="zfileuploaddownload.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+     xmlns:u="sap.ui.unified">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="File Management">
+					<content>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Label text="Attachment" design="Bold"/>
+							<u:FileUploader id="fileUploader" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server"
+								uploadComplete="handleUploadComplete" change="handleValueChange" typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="txt,jpg,pdf"
+								placeholder="Choose a file for Upload...">
+								<u:parameters>
+									<u:FileUploaderParameter name="Accept-CH" value="Viewport-Width"/>
+									<u:FileUploaderParameter name="Accept-CH" value="Width"/>
+									<u:FileUploaderParameter name="Accept-CH-Lifetime" value="86400"/>
+								</u:parameters>
+							</u:FileUploader>
+							<Button text="Upload File" press="handleUploadPress"/>
+						</OverflowToolbar>
+						
+						<Table id="files" width="100%" items="{dashboard>/UploadedAttachment}">
+						<columns>
+						<Column>
+						<Label text="Filename"/>
+						</Column>
+						<Column>
+						<Label text="Mimetype"/>
+						</Column>
+						<Column>
+						<Label text="ReqNo"/>
+						</Column>
+						<!-- <Column>
+						<Label text="Value" wrapping="true"/>
+						</Column> -->
+						<Column>
+						<Button icon="sap-icon://download"/>
+						</Column>
+						</columns>
+						<items>
+						<ColumnListItem>
+						
+						<Text text="{dashboard>Filename}"/>
+						<Text text="{dashboard>Mimetype}"/>
+						<Text text="{dashboard>ReqNo}"/>
+						<!-- <Text text="{dashboard>Value}"/> -->
+						<Button icon="sap-icon://download" press="filedownload"/>
+						</ColumnListItem>
+						</items>
+						</Table>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
