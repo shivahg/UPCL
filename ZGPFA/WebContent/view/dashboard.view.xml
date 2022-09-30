@@ -1,0 +1,82 @@
+<mvc:View controllerName="ZGPFA.ZGPFA.controller.dashboard" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="GPF" >
+				<tnt:ToolHeader design="Auto"  width="180%">
+					
+						<Label 
+							text="GPF Dash Board For Approvals"></Label> 
+					</tnt:ToolHeader>
+					<content>
+						<Table id="dashboard" items="{dashboard>/}" insent="true" editTogglable="true"
+						growing="true" sticky="ColumnHeaders">
+							<headerToolbar>
+								<OverflowToolbar >
+										<Label design="Bold"  text="Items ({= ${dashboard>/}.length})"></Label> 
+										
+										<Button press="dashboardfilter" type="Emphasized" id="dw" icon="sap-icon://filter"/>
+				                  <ToolbarSpacer/>
+					<SearchField id="search" liveChange="onSearch" width="30%" />
+										
+								</OverflowToolbar>
+							</headerToolbar>
+					<columns>
+						<Column  hAlign="Left">
+							<Label text="Request Number"/>
+						</Column>
+						<Column hAlign="Left">
+							<Label text="Request Type"/>
+						</Column>
+						<Column  hAlign="Left">
+							<Label text="Name"/>
+						</Column>
+							<Column hAlign="Left">
+							<Label text="Date"/>
+						</Column> 
+							<Column hAlign="Left">
+							<Label text=" Request Amount"/>
+						</Column>
+						<Column hAlign="Left" >
+							<Label text=" Sanction Amount"/>
+						</Column>
+						
+						<Column hAlign="Left">
+							<Label text=" Paid Amount"/>
+						</Column> 
+						 <!-- <Column hAlign="Left">
+						 	<Label text=" Employee Comments"/>
+						</Column> -->
+						<!--  <Column hAlign="Left">
+						 	<Label text="Final Level Approver Comments"/>
+						</Column>  -->
+							<Column hAlign="Left">
+							<Label text="Status"/>
+						</Column>
+						
+							</columns>
+						<items>
+						<ColumnListItem>
+							<Button text="{dashboard>Zreqno}"  type="Emphasized" press="reqnopress"/>
+							<Text text="{dashboard>Rtext}"/>
+							<Text text="{dashboard>Name}"/>
+							<Text text="{dashboard>Cdate}"/>
+							<Text text="{dashboard>ReqAmt}"/>
+							<Text text="{dashboard>SanAmt}"/>
+							 <Text text="{dashboard>PaidAmt}"/>
+							 <!-- <Text text="{dashboard>EmpComm}"/> -->
+							 <!-- <Text text="{dashboard>A2Comm}"/> -->
+							 <Text text="{dashboard>Status}"/>
+							
+						</ColumnListItem>
+						</items>
+				
+				</Table>
+					</content>
+					
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
