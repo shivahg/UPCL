@@ -1,0 +1,877 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZPMS.ZPMS.controller.pmspage"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified">
+	<App>
+		<pages>
+			<Page title="Performance Appraisal Report" showFooter="true" id="pmspage" showNavButton="true"
+			navButtonPress="backpage">
+			<headerContent>
+			    
+				<core:Icon src="sap-icon://home" press="homepage" color="Black" size="1.4rem"/>
+		</headerContent>
+			<tnt:ToolHeader>
+			<core:Icon src="sap-icon://employee" press="employeefrag"
+			size="1.4rem" color="white"/>
+			<ToolbarSpacer/>
+			
+			<u:FileUploader id="fileUploader" name="myFileUpload"  tooltip="Upload your file to the local server"
+								placeholder="Choose a file for Upload..." visible="true" fileType="pdf,jpg,png,jpeg"
+								editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+								<u:parameters>
+									<u:FileUploaderParameter name="Accept-CH" value="Viewport-Width"/>
+									<u:FileUploaderParameter name="Accept-CH" value="Width"/>
+									<u:FileUploaderParameter name="Accept-CH-Lifetime" value="86400"/>
+								</u:parameters>
+							</u:FileUploader>
+							<Button text="Upload File" press="handleUploadPress"/> 
+			
+			
+				<core:Icon src="sap-icon://my-view" press="myview" color="white" size="1.4rem"/>
+			
+			</tnt:ToolHeader>
+				<content>
+				
+				<f:SimpleForm title="{pmsmodel>/pmsdetails/Pernr}" editable="true" layout="ResponsiveGridLayout" backgroundDesign="Translucent" breakpointL="1024" breakpointM="600"
+						breakpointXL="1440" labelSpanXL="4" labelSpanL="4" labelSpanM="2" labelSpanS="2" adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+						emptySpanM="1" emptySpanS="1" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+						<f:content>
+							<core:Title text=""/>
+							<Label design="Bold" text="Name"/>
+							<Text id="name" text="{pmsmodel>/pmsdetails/Uname}" />
+							<Label design="Bold" text="Period of Appraisal"/>
+							<Text id="poa" text="{pmsmodel>/pmsdetails/ZzperiodApp}"/>
+							<core:Title text=""/>
+							<Label design="Bold" text="Designation"/>
+							<Text id="design" text="{pmsmodel>/pmsdetails/Zzdesignation}"/>
+							<Label design="Bold" text="Audit. No"/>
+							<Text id="audno" text="{pmsmodel>/pmsdetails/ZzauditNo}" />
+						</f:content>
+					</f:SimpleForm>
+					<Panel id="p1" backgroundDesign="Translucent" visible="false" headerText="Section 1(Basic Information)">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+						
+							<f:content>
+								<core:Title text=""/>
+								<Text text="1.During Appraisal Period"/>
+								<Label design="Bold" text="1.1 Place of Posting"/>
+								<Text text="{pmsmodel>/pmsdetails/Zzplace}"/>
+								<Label design="Bold" text="1.2 Name of Circle/Zone"/>
+								<Text text="{pmsmodel>/pmsdetails/Zzcirclezone}"/>
+								
+								<Label design="Bold" text="2.Date Of Birth"/>
+								<Text text="{pmsmodel>/pmsdetails/Zzdob}"/>
+							     <Label text="3.Educational Qualification"/>
+							     <Text text=""/>
+								<Label design="Bold" text="3.1 At the time of initial joining in the Corporation"/>
+								<Input value="{pmsmodel>/pmsdetails/Zzinitialed}" width="40%"/>
+								<Label design="Bold" text="3.2 Qualification acquired during service of the Corporation"/>
+								<Input width="40%" 
+								editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X' || ${pmsmodel>/pmsdetails/Zzsection}!=='T'}"/>
+							</f:content>
+						</f:SimpleForm>
+					
+				<!-- 			<Table id="reporting" items="{pmsdetails>/reportingdp}"  width="100%">
+								
+									
+									<infoToolbar>
+								<Toolbar>
+									<Text text="4.Reporting, reviewing and final authorities"/>
+								</Toolbar>
+							</infoToolbar>
+								
+								<columns>
+									<Column width="30%">
+										<Label design="Bold" text="Reporting Authority"/>
+									</Column>
+									<Column hAlign="Begin" demandPopin="true" minScreenWidth="Desktop">
+										<header>
+											<Label design="Bold" text="Name And Designation"/>
+										</header>
+									</Column>
+									<Column hAlign="Begin">
+										<header>
+											<Label design="Bold" text="Period of Appraisal"/>
+										</header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{pmsdetails>reporting}"/>
+											<Input value="{pmsdetails>ZzreportAuth}"/>
+											<Input value="{pmsdetails>ZzperiodApp}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>  -->
+							<f:SimpleForm editable="false" layout="ResponsiveGridLayout"  
+						title="4.Reporting, reviewing and final authorities">
+						
+							<f:content>
+								<Label text=" 4.Reporting Authority" design="Bold"/>
+								<tnt:InfoLabel  text="{pmsmodel>/pmsdetails/ZzreportAuth}" renderMode="Narrow" colorScheme="7" displayOnly= "true" />
+								<tnt:InfoLabel  text="{pmsmodel>/pmsdetails/ZzreportPer}" renderMode="Narrow" colorScheme="8" displayOnly= "true" />
+								
+								<Label design="Bold" text="Review Authority" />
+								
+								<tnt:InfoLabel  text="{pmsmodel>/pmsdetails/ZzreviewAuth}" renderMode="Narrow" colorScheme="1" displayOnly= "true" />
+								<tnt:InfoLabel  text="{pmsmodel>/pmsdetails/ZzreviewPer}" renderMode="Narrow" colorScheme="8" displayOnly= "true" />
+								<Label design="Bold" text="Accepting Authority"/>
+								
+								<tnt:InfoLabel  text="{pmsmodel>/pmsdetails/ZzacceptAuth}" renderMode="Narrow" colorScheme="6" displayOnly= "true" />
+								<tnt:InfoLabel  text="{pmsmodel>/pmsdetails/ZzacceptPer}" renderMode="Narrow" colorScheme="8" displayOnly= "true" icon="sap-icon://home-share"/>
+						
+							</f:content>
+						</f:SimpleForm>
+							<Table id="pms_leavesSet" items="{pmsmodel>/pms_leavesSet}"  width="100%">
+								
+								<infoToolbar>
+								<Toolbar>
+									<Text text="5.Leave (other than C/L) or Period of absence"/>
+									
+								</Toolbar>
+							</infoToolbar>
+								<columns>
+									
+									<Column hAlign="Center" demandPopin="true" minScreenWidth="Desktop" width="30%">
+										<header>
+											<Label design="Bold" text="Period"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="Type"/>
+										</header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<tnt:InfoLabel  text="{pmsmodel>Zzperiod}" colorScheme="8" displayOnly= "true" icon="sap-icon://calendar"
+											renderMode="Narrow"/>
+										
+											<Text text="{pmsmodel>Zztype}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						
+						<Table id="pms_honoursSet" items="{path:'pmsmodel>/pms_honoursSet'}"   width="100%" mode="Delete" 
+							delete="handleDelete"  selection="true">
+							<infoToolbar>
+								<Toolbar>
+									<Text text="6.Appreciation/Honours during the period of appraisal from the corporation"/>
+									<ToolbarSpacer/>
+									<Button  icon="sap-icon://add" press="AppreciationHonours" Emphasized="true" 
+									visible="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+								</Toolbar>
+							</infoToolbar>
+							<columns>
+							
+								<Column hAlign="Center" demandPopin="true" minScreenWidth="Desktop">
+									<header>
+										<Label design="Bold" text="Type of Appreciation/Honours"/>
+									</header>
+								</Column>
+								<Column hAlign="Center">
+									<header>
+										<Label design="Bold" text="Brief Details"/>
+									</header>
+								</Column>
+								
+							</columns>
+							<items>
+							
+								<ColumnListItem>
+									<cells>
+										
+										<Text text="{pmsmodel>Zzapptype}"/>
+										<Text text="{pmsmodel>Zzappbrief}"/>
+										
+									</cells>
+								</ColumnListItem>
+						
+							</items>
+						</Table>
+						<Table id="pms_perappSet" items="{path:'pmsmodel>/pms_perappSet'}"  width="100%"
+						mode="Delete"  delete="handleDeleteperiod">
+							<infoToolbar>
+								<Toolbar>
+									<Text text="7.Details of Performance Appraisals of sub-ordinates not written for the previous year"/>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://add" press="addperformance" visible="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+								</Toolbar>
+							</infoToolbar>
+							<columns>
+								
+								<Column demandPopin="true" minScreenWidth="Desktop" width="40%" hAlign="Center">
+									<header>
+										<Label design="Bold" text="Name of Sub-ordinate with Designation"/>
+									</header>
+								</Column>
+								<Column hAlign="Center">
+									<header>
+										<Label design="Bold" text="Period"/>
+									</header>
+								</Column>
+								<Column hAlign="Center">
+									<header>
+										<Label design="Bold" text="Reason"/>
+									</header>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										
+										<Text text="{pmsmodel>Zzsubdes}"/>
+										<Text text="{pmsmodel>Zzperiod}"/>
+										<Text text="{pmsmodel>Zzreason}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<f:SimpleForm>
+						<Label text="8.Date of filing property return for the year ending December" design="Bold"/>
+						<DatePicker width="40%" value="{pmsmodel>/pmsdetails/Zzfdate}" id="Zzfdate" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+						</f:SimpleForm>
+						
+					</Panel>
+					<Panel id="p2" visible="false" backgroundDesign="Translucent" headerText="Sction II(Self Appraisal)">
+						
+						<VBox>
+							<Table id="actiontable5" items="" inset="false" width="100%">
+								<infoToolbar>
+									<Toolbar>
+										<Text text="Reference Table for Grading and Percentage%"/>
+									</Toolbar>
+								</infoToolbar>
+								<columns>
+									<Column demandPopin="true" minScreenWidth="Desktop" width="15%" hAlign="Center">
+										<header>
+											<Label design="Bold" text="100 above" />
+										</header>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" hAlign="Center">
+										<header>
+											<Label design="Bold" text="100-95"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="95-90"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="90-85"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<Label design="Bold" text="85-80"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" hAlign="Center">
+										<header>
+											<Label design="Bold" text="80-75"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="75-70"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="70-65"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="60-65"/>
+										</header>
+									</Column>
+									<Column width="15%" hAlign="Center">
+										<header>
+											<Label design="Bold" text="60 and below"/>
+										</header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+										    <Text text="10"/>
+											<Text text="9"/>
+											<Text text="8"/>
+											<Text text="7"/>
+											<Text text="6"/>
+											<Text text="5"/>
+											<Text text="4"/>
+											<Text text="3"/>
+											<Text text="2"/>
+											<Text text="1"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<Table id="actiontable6" items="{pmsmodel>/pms_kpiSet}" inset="false" width="100%">
+								<infoToolbar>
+									<Toolbar>
+										<Text text=" 9.Assessment of Performance(Table-A- (Weightage)-70%)"/>
+									</Toolbar>
+								</infoToolbar>
+								<columns>
+									
+									<Column demandPopin="true" minScreenWidth="Desktop">
+										<header>
+											<Label design="Bold" text="Parameters"/>
+										</header>
+									</Column>
+									<Column >
+										<header>
+											<Label design="Bold" text="Target"/>
+										</header>
+									</Column>
+									<Column >
+										<header>
+											<Label design="Bold" text="Target Achieved"/>
+										</header>
+									</Column>
+									<Column >
+										<Label design="Bold" text="Target Achieved"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" hAlign="Center">
+										<header>
+											<Label design="Bold" text="Grading"/>
+										</header>
+									</Column>
+									
+									
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											
+											<Text text="{pmsmodel>Name1}"/>
+											<Text text="{pmsmodel>Target}"/>
+											<Input value="{pmsmodel>TargetA}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+											<MaskInput mask="999" placeholder="Percentage" 
+											placeholderSymbol="" change="SSelfgrading" value="{pmsmodel>TargetP}"
+											editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+											<Text text="{pmsmodel>Grading}"/>
+											
+											
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<Table id="actiontable7" items="{pmsmodel>/pms_trainingSet}" inset="false" width="100%">
+								<infoToolbar>
+									<Toolbar>
+										<Text text="10.Table-B-(Weightage)-10%"/>
+									</Toolbar>
+								</infoToolbar>
+								<columns>
+									<Column >
+										<Label design="Bold" text="Parameter" wrapping="true"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" width="10%">
+										<header>
+											<Label design="Bold" text="Marks" wrapping="true"/>
+										</header>
+									</Column>
+									<Column >
+										<header>
+											<Label design="Bold" text="Nominated Man days" wrapping="true"/>
+										</header>
+									</Column>
+									<Column >
+										<header>
+											<Label design="Bold" text="Attended Man days" wrapping="true"/>
+										</header>
+									</Column>
+									<Column >
+										<Label design="Bold" text=" Attended Man days" wrapping="true"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" width="10%">
+										<header>
+											<Label design="Bold" text="Grading" wrapping="true"/>
+										</header>
+									</Column>
+									<Column width="15%">
+										<header>
+											<Label design="Bold" text="Remark (if any)" wrapping="true"/>
+										</header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{pmsmodel>Paramete}"/>
+											<Text text="{pmsmodel>Marks}"/>
+											<Input value="{pmsmodel>Nomandays}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+											<Input value="{pmsmodel>Atmandays}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+											<MaskInput value="{pmsmodel>Patmandays}" 
+											mask="999" placeholder="Percentage" placeholderSymbol="" 
+											change="SSelftraining" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+											<Text text="{pmsmodel>Grade}" />
+											<Input value="{pmsmodel>Remarks}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<MessageStrip type="Warning" enableFormattedText="true" text="{i18n>note1}" showIcon="false" showCloseButton="false"
+								class="sapUiTinyMarginTop"></MessageStrip>
+							<Table id="actiontable8" items="{pmsmodel>/pms_acrSet}" inset="false" width="100%">
+								<columns>
+									<Column width="15%" hAlign="Center">
+										<Label design="Bold" text="Parameter" wrapping="true"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" width="10%">
+										<header>
+											<Label design="Bold" text="Marks" wrapping="true"/>
+										</header>
+									</Column>
+									<Column hAlign="Center" width="10%">
+										<header>
+											<Label design="Bold" text="Marks Obtained" wrapping="true"/>
+										</header>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" width="10%">
+										<header>
+											<Label design="Bold" text="Grading" wrapping="true"/>
+										</header>
+									</Column>
+									<Column>
+										<header>
+											<Label design="Bold" text="Remarks" wrapping="true"/>
+										</header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{pmsmodel>Paramete}"/>
+											<Text text="{pmsmodel>Marks}"/>
+											<Input liveChange ="acrmarks" value="{pmsmodel>Marksob}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+											<Input value="{pmsmodel>Grade}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+											<TextArea rows="2" value="{pmsmodel>Remarks}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}" width="70%"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<MessageStrip type="Warning" enableFormattedText="true" text="{i18n>note2}" showIcon="false" showCloseButton="false"
+								class="sapUiTinyMarginTop"></MessageStrip>
+							<Text text=""/>
+							<Label text="11.Any exceptional contribution during the period of appraisal (Maximum 100 words)" design="Bold"/>
+							<TextArea rows="4" width="90%" value="{pmsmodel>/pmsdetails>CONTRI11}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+							<Label text="12.Difficulties faced in performing the assigned Tasks/Duties (Maximum 100 words)" design="Bold"/>
+							<TextArea rows="4" width="90%" value="{pmsmodel>/pmsdetails>DIFF12}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+							<MessageStrip type="Information" enableFormattedText="true" text="{i18n>note3}" showIcon="false" showCloseButton="false"
+								class="sapUiTinyMarginTop"></MessageStrip>
+								
+							<Table id="actiontable10" items="{pmsmodel>/pms_caseSet}"  inset="false" width="100%"
+							mode="Delete" 
+							delete="handleDeletecaseset">
+							<infoToolbar>
+								<Toolbar>
+									<Text text=" 13.Details of Cases"/>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://add" press="detailofcases" visible="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+								</Toolbar>
+							</infoToolbar>
+								<columns>
+									
+									<Column demandPopin="true" minScreenWidth="Desktop" hAlign="Center">
+										<header>
+											<Label design="Bold" text="Details of cases" wrapping="true"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="Amount paid as penalty(in Rs)" wrapping="true"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="Paid by Corporation or Incumbent" wrapping="true"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<Label design="Bold" text="Reason" wrapping="true"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+										
+											<Text text="{pmsmodel>Perti}"/>
+											<Text text="{pmsmodel>Amount}"/>
+											<Text text="{pmsmodel>Paid}"/>
+											<Text text="{pmsmodel>Reason}"/>
+											
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</VBox>
+					</Panel>
+					<Panel id="p3" visible="false" headerText="Appraisal by Reporting Officer">
+						
+						<Text text=""/>
+						<Text text=" 14.a {i18n>note3}" font-size="1rem"/>
+						
+						<RadioButton  text="Yes" id="Yes" select="s3Zkpiagg" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+						<RadioButton  text="No" id="No" select="s3Zkpiagg" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+						<Text text=""/>
+						 <Table id="actiontablekpi" items="{pmsmodel>/pms_kpiSet}" inset="false" width="100%">
+								<infoToolbar>
+									<Toolbar>
+										<Text text="9.Assessment of Performance(Table-A- (Weightage)-70%)"/>
+									</Toolbar>
+								</infoToolbar>
+								<columns>
+									
+									<Column demandPopin="true" minScreenWidth="Desktop">
+										<header>
+											<Label design="Bold" text="Parameters" wrapping="true"/>
+										</header>
+									</Column>
+									<Column >
+										<header>
+											<Label design="Bold" text="Target" wrapping="true"/>
+										</header>
+									</Column>
+									<Column >
+										<header>
+											<Label design="Bold" text="Target Achieved" wrapping="true"/>
+										</header>
+									</Column>
+									<Column >
+										<Label design="Bold" text="%age Target Achieved" wrapping="true"/>
+									</Column>
+									<Column demandPopin="true" minScreenWidth="Desktop" hAlign="Center" width="10%">
+										<header>
+											<Label design="Bold" text="Grading" wrapping="true"/>
+										</header>
+									</Column>
+									 <Column demandPopin="true" minScreenWidth="Desktop" width="25%">
+										<header>
+											<Label design="Bold" text=" Reporting Officer" wrapping="true"/>
+										</header>
+									</Column> 
+									
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											
+											<Text text="{pmsmodel>Name1}"/>
+											<Text text="{pmsmodel>Target}"/>
+											<Input value="{pmsmodel>TargetA}" editable="false"/>
+											<MaskInput mask="999" placeholder="Percentage" 
+											placeholderSymbol="" change="SSelfgrading" value="{pmsmodel>TargetP}"
+											editable="false"/>
+											<Text text="{pmsmodel>Grading}"/>
+											<TextArea rows="2" value="{pmsmodel>FinalTar}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}" width="70%"/>
+											
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						<Text text=" 14.b {i18n>note4}"/>
+						<TextArea rows="3" width="90%" value="{pmsmodel>/pmsdetails>BACCOM14}" 
+						id="BACCOM14" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+						<Text text=" 15.{i18n>note5}"/>
+						<TextArea rows="3" width="90%" value="{pmsmodel>/pmsdetails>EXCCONTI15}" 
+						id="EXCCONTI15" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+						<Text text="16.{i18n>note6}"/>
+						<TextArea rows="3" width="90%" value="{pmsmodel>/pmsdetails>SIGFAIL16}" 
+						id="SIGFAIL16" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+						<Text text="17.{i18n>note7}"/>
+						<TextArea rows="3" width="90%" value="{pmsmodel>/pmsdetails>DELAY17}" id="DELAY17"
+						editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+					
+		
+					
+						<OverflowToolbar>
+						
+					<ToolbarSpacer/>
+			
+						</OverflowToolbar>
+							
+		         
+		                  
+		                   
+		                  
+					<html:h2>Training Topics</html:h2>
+					<Table items="{pmsmodel>/pms_trtopicSet}" id="pms_trtopicSet" mode="MultiSelect">
+						<infoToolbar>
+						<Toolbar>
+						<Text text="18.{i18n>note8}"/>
+				
+						</Toolbar></infoToolbar>
+						<columns>
+							<Column hAlign="Center">
+								<Label text=" Training Topics"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text=" Topics"/>
+							</Column>
+							<!-- <Column hAlign="Center">
+								<Label text="Tick"/>
+							</Column> -->
+						</columns>
+						<items>
+							<ColumnListItem multiSelect="true">
+								<cells>
+								    <Text text="{pmsmodel>TrainigTopic}"/>
+									<Text text="{pmsmodel>Topic}"/>
+									<!-- <CheckBox selected="{{pmsmodel>Tick}}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/> -->
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Table items="{pmsmodel>/pms_trgradeSet}" id="pms_trgradeSet1">
+						<infoToolbar>
+							<Toolbar>
+								<Text text="19.Assessment of Personal Attributes Table-C 1-(Weightage)-20% "/>
+							</Toolbar>
+						</infoToolbar>
+						<columns>
+							<Column hAlign="Center">
+							<Label text="SN"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text="Parameters"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text="Gradings"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text/>
+									<Text text="{pmsmodel>TrainingName}"/>
+									<ComboBox
+					
+					width="60%"
+				items="{
+					 path:'gradings1>/gradings',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>Grade}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gradings1>grade}"  key="{gradings1>grade}"/>
+					</ComboBox>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Text text="20.{i18n>note9}"/>
+					<TextArea rows="3" width="70%" value="{pmsmodel>/pmsdetails>INTIC20}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+						<Text text=" 21.{i18n>note10}"/>
+					<TextArea rows="3" width="70%" value="{pmsmodel>/pmsdetails>SUGVAR21}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+					<html:h2>Suggested variation </html:h2>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Translucent" >						
+							<f:content>
+								<Label text="Pt.-9/ Table-A"/>
+								    	<ComboBox 
+					id="s3a"
+					width="40%" 
+				items="{
+					 path:'gpi>/gradingpoints',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>/pmsdetails/Zsugvara3}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gpi>gp}"  key="{gpi>gp}"/>
+					</ComboBox>
+					<Label text="Pt.-10/ Table-B"/>
+							    	
+							    	<ComboBox 
+					id="s3b"
+					width="40%" 
+				items="{
+					 path:'gpi>/gradingpoints',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>/pmsdetails/Zsugvarb3}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gpi>gp}"  key="{gpi>gp}"/>
+					</ComboBox>
+							</f:content>
+						</f:SimpleForm>
+					
+			
+					</Panel>
+					<Panel id="p4" headerText="Assessment by Reviewing Authority">
+						
+						<Text text="22.{i18n>note11}"/>
+					    <Table items="{pmsmodel>/pms_revass4Set}">
+					    <columns>
+					    <Column hAlign="Center">
+					    <Label text="Point No"/>
+					    </Column>
+					    <Column hAlign="Center">
+					    <Label text="Yes/No"/>
+					    </Column>
+					    <Column hAlign="Center">
+					    <Label text="If not, give reasons" wrapping="true"/>
+					    </Column>
+					    <Column hAlign="Center">
+					    <Label text="Your Assessment" wrapping="true"/>
+					    </Column>
+					    </columns>
+					    <items>
+					    <ColumnListItem>
+					    <Text text="{pmsmodel>Point}"/>
+					  <!--   <Text text="{pmsmodel>Yesno}"/> -->
+					  <ComboBox
+					
+					width="60%"
+				items="{
+					 path:'Action>/',
+					 templateShareable:false
+					 }"  selectedKey="{pmsmodel>Yesno}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{Action>action}"  key="{Action>action}"/>
+					</ComboBox>
+					    <TextArea rows="2" value="{pmsmodel>Reason}"  editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+					    <TextArea value="{pmsmodel>Yasses}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+					    </ColumnListItem>
+					    </items>
+					    </Table>
+					    
+					    
+					    <Text text="{i18n>note12}"/>
+					   
+					
+					    
+					    
+					    <Table items="{pmsmodel>/pms_revgrade4Set}" id="pms_revgrade4Set">
+						<infoToolbar>
+							<Toolbar>
+								<Text text=" 23.Assessment of Personal Attributes Table-C 1-(Weightage)-20% "/>
+							</Toolbar>
+						</infoToolbar>
+						<columns>
+							
+							<Column hAlign="Center">
+								<Label text="Parameters"/>
+							</Column>
+							<Column hAlign="Center">
+								<Label text="Gradings"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									
+									<Text text="{pmsmodel>Param}"/>
+									<ComboBox
+					
+					width="60%"
+				items="{
+					 path:'gradings1>/gradings',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>Grade}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gradings1>grade}"  key="{gradings1>grade}"/>
+					</ComboBox>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					    
+					    
+					    
+					    <Text text="24.{i18n>note13}"/>
+					    <TextArea rows="3" width="70%"  value="{pmsmodel>/pmsdetails/Zrexcgood}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+					    
+					    
+					    <html:h2>Suggested variation </html:h2>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Translucent" >						
+							<f:content>
+								<Label text="Pt.-9/ Table-A"/>
+								    	<ComboBox 
+					
+					width="40%" 
+				items="{
+					 path:'gpi>/gradingpoints',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>/pmsdetails/Zsugvara4}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gpi>gp}"  key="{gpi>gp}"/>
+					</ComboBox>
+					<Label text="Pt.-10/ Table-B"/>
+							    	
+							    	<ComboBox 
+				
+					width="40%" 
+				items="{
+					 path:'gpi>/gradingpoints',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>/pmsdetails/Zsugvarb4}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gpi>gp}"  key="{gpi>gp}"/>
+					</ComboBox>
+							</f:content>
+						</f:SimpleForm>
+					    
+					 
+					</Panel>
+					
+                   <Panel id="p5"  visible="false" headerText="Accepting Authority">
+                   <Text text="26.{i18n>note14}"/>
+                   <TextArea id="14" width="70%" value="{pmsmodel>/pmsdetails/Zaaoverass}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+                   
+                   <Text text="27.{i18n>note15}"/>
+                   <TextArea id="15"  width="70%" value="{pmsmodel>/pmsdetails/Zaarexcgood}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"/>
+                   <html:h2>Suggested variation </html:h2>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout" backgroundDesign="Translucent" >						
+							<f:content>
+								<Label text="Pt.-9/ Table-A"/>
+								    	<ComboBox 
+					
+					width="40%" 
+				items="{
+					 path:'gpi>/gradingpoints',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>/pmsdetails/Zsugvara5}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gpi>gp}"  key="{gpi>gp}"/>
+					</ComboBox>
+					<Label text="Pt.-10/ Table-B"/>
+							    	
+							    	<ComboBox 
+				
+					width="40%" 
+				items="{
+					 path:'gpi>/gradingpoints',
+					 templateShareable:false
+					 }" selectionChange="grading" selectedKey="{pmsmodel>/pmsdetails/Zsugvarb5}" editable="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}">
+				<core:Item  text="{gpi>gp}"  key="{gpi>gp}"/>
+					</ComboBox>
+					
+							</f:content>
+						</f:SimpleForm>
+						
+                
+                   </Panel>
+                     <panel id="p6" headerText="Director">
+                     <Text text=" 25.Final Overall Grade corresponding to the Assessment of Reporting, Reviewing  Accepting 
+                     Authority on 10 points Scale"/>
+                     <Input value="{pmsmodel>/pmsdetails/Zzdirgrade}" width="50%" editable="false"/>
+                     	    	<!-- <ComboBox 
+					
+					width="40%" 
+				items="{
+					 path:'gpi>/gradingpoints',
+					 templateShareable:false
+					 }" selectionChange="grading">
+				<core:Item  text="{gpi>gp}"  key="{gpi>gp}"/>
+					</ComboBox> -->
+                     </panel>
+				</content>
+
+				<footer>
+					<OverflowToolbar>
+					
+						<ToolbarSpacer/>
+						<Button type="Emphasized" icon="sap-icon://save" press="Save" visible="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"></Button>
+						<Button type="Success" text="Submit" press="Submit" visible="{= ${pmsmodel>/pmsdetails/Zzdisplay}!=='X'}"></Button>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

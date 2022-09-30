@@ -1,0 +1,117 @@
+/*  .sapMColumnHeader {
+    display: flex;
+    flex: 1 1 auto;
+    padding: .875rem .5rem 1rem;
+    background-color: #d8f691;
+}
+
+.sapUiSizeCompact .sapMListTblNavCol, .sapUiSizeCompact .sapMListTblCell {
+    vertical-align: middle;
+    background-color: #7ed0ff59;
+}
+.sapMPage>.sapMPageHeader + section, .sapMPage>.sapMPageSubHeader + section, .sapMPage>.sapMPageHeader + .sapUiHiddenPlaceholder + section {
+    top: 3rem;
+    background-color: #d2efff;
+}
+.sapMLIBShowSeparator>td {
+    border-top: 1px solid #e5e5e5;
+    background-color: #d2efff;
+}
+.dashbord {
+    
+    border-top: 1px solid #e5e5e5;
+    background-color: #38c3c3;
+
+}
+ ///////////delete button///////////////////////////////
+.sapMListTblSelCol {
+    line-height: 2rem;
+    text-align: center;
+    background-color: #ffa500c4;
+}
+/////////table leftpadding/////////////////
+.sapUiSizeCompact .sapMListTblHighlightCol + .sapMListTblCell.sapMListTblHeaderCell {
+    padding-left: 0;
+}
+
+///////sections////////////////
+.sapMLIB {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    background: #d2efff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 1rem 0 1rem;
+}
+/////delete buttons////////////
+.sapUiSizeCompact .sapMListTblHasNav .sapMListTblNavCol:last-child, .sapUiSizeCompact .sapMListTblSelCol:last-child {
+    width: 2.5rem;
+    background-color: orange;
+}
+
+////////left paddings/////////////////////////
+.sapUiSizeCompact .sapMListTblHighlightCol + .sapMListTblCell.sapMListTblHeaderCell {
+    padding-left: 0rem;
+}
+
+////////right paddings///////////////////
+.sapUiSizeCompact .sapMListTblHeaderCell:nth-last-child(2) {
+    padding-right: 0rem;
+}
+////////title text/////////////////
+.title {
+    display: inline-block;
+    box-sizing: border-box;
+    white-space: pre-line;
+    word-wrap: break-word;
+    cursor: text;
+    font-size: 1rem;
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    line-height: normal;
+    color: #333333;
+    
+}
+  .navlist{
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    background: #fabd649e;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 1rem 0 1rem;
+}*/
+
+
+.headertitle {
+    display: grid;
+    box-sizing: initial;
+    white-space: pre-line;
+    word-wrap: break-word;
+    cursor: text;
+    font-size: 2rem;
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    line-height: normal;
+    color: #333333;
+} 
+
+
+.sapMPanelHdr {
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: none;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 1rem;
+    margin: 0;
+    -webkit-text-size-adjust: none;
+    font-weight: normal;
+    font-size: x-large;
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    color: #fabd64;
+    background-color: aliceblue;
+}

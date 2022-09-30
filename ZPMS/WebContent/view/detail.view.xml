@@ -1,0 +1,18 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZPMS.ZPMS.controller.detail"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Uttarakhand Power Corporation Limited" showNavButton="true"
+			navButtonPress="backpage" showFooter="true">
+				
+				        <Image src="{img>/images/upcluttarakhand.png}" width="100%"/> 
+				      
+				 	 <Text hAlign="Center"  text="Annual Confidential Report(ACR)" class="headertitle"/>
+				      <footer>
+					<OverflowToolbar> 
+						</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

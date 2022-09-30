@@ -1,0 +1,49 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	 <Dialog
+		title="File Attachments"
+		contentWidth="70%">
+		<buttons>
+		<button text="Close" press="dclose" type="close" ></button>
+	</buttons>
+		<Panel>
+		<Table id="files"   width="100%">
+								
+									
+									<infoToolbar>
+								<Toolbar>
+									<Text text="File Attachmenments"/>
+								</Toolbar>
+							</infoToolbar>
+								
+								<columns>
+									<Column width="30%" hAlign="Center">
+										<Label design="Bold" text="Filename"/>
+									</Column>
+									<Column hAlign="Center" demandPopin="true" minScreenWidth="Desktop">
+										<header>
+											<Label design="Bold" text="FileType"/>
+										</header>
+									</Column>
+									<Column hAlign="Center">
+										<header>
+											<Label design="Bold" text="Action"/>
+										</header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="abcd"/>
+											<Input value="pdf"/>
+											<Input value="download"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>  
+		</Panel>
+		
+		</Dialog> 
+		</core:FragmentDefinition>

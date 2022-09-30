@@ -1,0 +1,151 @@
+ {
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "ZPMS.ZPMS",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "ZPMS.ZPMS.view.Dashboards",
+			"type": "XML",
+			"async": true,
+			"id": "Dashboards"
+		},
+		"dependencies": {
+			"minUI5Version": "1.65.6",
+			"libs": {
+				"sap.ui.layout": {
+				"lazy": true
+				},
+				"sap.ui.core": {},
+				"sap.m": {}
+				
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ZPMS.ZPMS.i18n.i18n"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			],
+			"Json" : [{
+						"uri" : "model/grading.json"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "ZPMS.ZPMS.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false,
+			           "bypassed": {
+					"target": [
+						"detail",
+						"master"
+					]
+				 } 
+			},
+			"routes": [
+				{
+					"name": "Dashboards",
+					"pattern": "",
+					"target": [
+						"Dashboards"
+					]
+				},
+				{
+					"name": "master",
+					"pattern": "master/{key}/{Apid}",
+					"target": [
+						"master",
+						"detail"
+					]
+				},
+					{
+					"name": "pmspage",
+					"pattern": "pmspage/{s1}/{Apid}",
+					"target": [
+						"pmspage"
+						
+					]
+				}
+			],
+			"targets": {
+			"Dashboards": {
+					"viewType": "XML",
+					"viewName": "Dashboards"
+				},
+				
+				"split_initial": {
+					"viewType": "XML",
+					"viewName": "split_initial"
+				},
+				"master": {
+					"viewType": "XML",
+					"viewName": "master",
+					"parent": "split_initial",
+					"controlAggregation": "masterPages",
+					"controlId": "pmsdetails",
+					"viewLevel": 1
+				},
+				"detail": {
+					"viewType": "XML",
+					"viewName": "detail",
+					"parent": "split_initial",
+					"controlAggregation": "detailPages",
+					"controlId": "pmsdetails",
+					"viewLevel": 1
+				},
+				"pmspage": {
+					"viewType": "XML",
+					"viewName": "pmspage",
+					"parent": "split_initial",
+					"controlAggregation": "detailPages",
+					"controlId": "pmsdetails"
+				}
+			}
+		}
+	}
+}

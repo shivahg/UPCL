@@ -1,0 +1,22 @@
+{
+"reportingdp" : [
+              {
+				"reporting": "Reporting Authority",
+			    "ZzreportAuth":"",
+			    "ZzperiodApp":""
+				
+				}, 
+				{
+				"reporting": "Reviewing Authority",
+                 "ZzreportAuth":"",
+                 "ZzperiodApp":""
+                    
+                    },
+			{
+				"reporting": "Accepting Authority",
+				"ZzreportAuth":"",
+				"ZzperiodApp":""
+                    
+			}
+		]
+		}

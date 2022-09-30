@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	 <Dialog
+		title="Appreciation/Honours"
+		contentWidth="40%">
+		<buttons>
+		<button text="ADD"  type="Emphasized" press="Add"></button>
+		<button text="Close" press="dclose" type="Reject" ></button>
+	</buttons>
+		<Panel id="f1">
+		<f:SimpleForm editable="true" title="Appreciation/Honours Form">
+		<f:content>
+		
+		<Label text="Type of Appreciation/Honours" design="Bold"/>
+		<Input id="ns"/>
+		<Label text="Brief Details" design="Bold"/>
+		<Input id="pd"/>
+		<!-- <Label text="Reason" design="Bold"/>
+		<Input id="rs"/> -->
+		</f:content>
+		
+		
+		</f:SimpleForm>
+		</Panel>
+		
+		</Dialog> 
+		</core:FragmentDefinition>

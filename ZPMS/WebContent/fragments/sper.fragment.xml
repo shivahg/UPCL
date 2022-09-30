@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
+	 <Dialog
+		title="Appreciation/Honours"
+		contentWidth="70%">
+		<buttons>
+		<button text="ADD"  type="Emphasized" press="Add"></button>
+		<button text="Close" press="dclose" type="Reject" ></button>
+	</buttons>
+		<Panel id="f1" title="Percentage Table">
+		
+			<f:Simpleform editable="true">
+			<Label text="Pt.-9/ Table-A"/>
+			
+			</f:Simpleform>
+		
+		
+	
+        
+         
+  
+ 
+
+		</Panel>
+		
+		</Dialog> 
+		</core:FragmentDefinition>

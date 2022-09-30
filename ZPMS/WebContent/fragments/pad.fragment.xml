@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	 <Dialog
+		title="Performance Appraisals"
+		contentWidth="50%">
+		<buttons>
+		<button text="ADD"  type="Emphasized" press="addrec"></button>
+		<button text="Close" press="close" type="Reject" ></button>
+	</buttons>
+		<Panel id="p2">
+		<f:SimpleForm editable="true" title="Details of Performance Appraisals of sub-ordinates not written for the previous year">
+		<f:content>
+		
+		<Label text="Name of Sub-ordinate with Designation" design="Bold"/>
+		<Input id="ns"/>
+		<Label text="Period" design="Bold"/>
+		<Input id="pd"/>
+		<Label text="Reason" design="Bold"/>
+		<Input id="rs"/>
+		</f:content>
+		
+		
+		</f:SimpleForm>
+		</Panel>
+		
+		</Dialog> 
+		</core:FragmentDefinition>

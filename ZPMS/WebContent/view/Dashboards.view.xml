@@ -1,0 +1,198 @@
+<mvc:View controllerName="ZPMS.ZPMS.controller.Dashboards" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+xmlns:t="sap.ui.table" xmlns:core="sap.ui.core" xmlns:tnt="sap.tnt">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="Annual Confidential Report" showFooter="true">
+				
+				 <content>
+							<IconTabBar
+		id="idIconTabBar"
+		select="pmsdashboard"
+		class="sapUiResponsiveContentPadding"
+		expanded="false"
+		expandable="false">
+		<items>
+			
+			<IconTabFilter
+				icon="sap-icon://customer"
+			    iconColor="Contrast"
+				design="Horizontal"
+				text="Employee"
+				key="1"
+				id="1">
+				
+				</IconTabFilter>
+			
+			<IconTabSeparator icon="sap-icon://open-command-field" />
+			<IconTabFilter
+				icon="sap-icon://manager"
+				iconColor="Neutral"
+				design="Horizontal"
+				text="Reporting Officer"
+				key="2"
+				id="2"/>
+			<IconTabSeparator icon="sap-icon://open-command-field" />
+			<IconTabFilter
+				icon="sap-icon://manager"
+				iconColor="Critical"
+				design="Horizontal"
+				text="Reviewing Officer"
+				key="3"
+				id="3"/>
+					<IconTabSeparator icon="sap-icon://open-command-field" />
+			<IconTabFilter
+				icon="sap-icon://manager"
+				iconColor="Default"
+				design="Horizontal"
+				text="Accepting Authority"
+				key="4" 
+				id="4"/>
+			<IconTabSeparator icon="sap-icon://open-command-field" />
+			<IconTabFilter
+				icon="sap-icon://manager"
+				iconColor="Positive"
+				design="Horizontal"
+				text="Director HR"
+				key="5" 
+				id="5"/> 
+				
+			
+		
+		</items>
+		
+	</IconTabBar>
+
+						<OverflowToolbar visible="false" id="of">
+						<!-- <Label design="Bold"  text="Items ({= ${dashboard>/}.length})"></Label> --> 
+						
+						<tnt:InfoLabel id="il8" text="Number of Items ({= ${dashboard>/}.length})" colorScheme="4" displayOnly= "true" icon="sap-icon://activity-items" />
+				                
+		
+		  <ToolbarSpacer/>
+					<SearchField id="search" liveChange="onSearch" width="30%" />
+					<MenuButton text="Filter" icon="sap-icon://filter">
+			<menu>
+				<Menu>
+					<MenuItem text="Edit" icon="sap-icon://edit" press="onPress">
+						<customData>
+							<core:CustomData
+								key="target"
+								value="p1" />
+						</customData>
+					</MenuItem>
+					
+					<MenuItem text="Only Display" icon="sap-icon://display" press="onPress">
+					<customData>
+							<core:CustomData
+								key="target"
+								value="p2" />
+						</customData>
+					</MenuItem>
+				</Menu>
+			</menu>
+		</MenuButton>
+		
+		
+						</OverflowToolbar>
+					
+				<t:Table id="dashboard" rows="{dashboard>/}" selectionMode="None"
+				sticky="ColumnHeaders" growing="true" autoResizable="true" class="dashbord" visible="false">
+				
+							<t:columns>
+							<t:Column >
+									<Label text="Appraisal ID" design="Bold"/>
+									<t:template>
+										<Link text="{dashboard>ZzappraisalId}" wrapping="true" press="employeedetails"/>
+									</t:template>
+								</t:Column>
+								<t:Column >
+									<Label text="Employee Code" design="Bold"/>
+									<t:template>
+										<Text text="{dashboard>Pernr}" wrapping="true"/>
+									</t:template>
+								</t:Column>
+								
+								<t:Column >
+									<Label text="Employee Name" design="Bold" wrapping="true"/>
+									<t:template>
+										
+										 <Text  text="{dashboard>Ename}"/>
+										<!-- <tnt:InfoLabel text="{parts:[{path:'dashboard>Ename'}], formatter:'.Empfor'}"
+										displayOnly="true"
+										  colorScheme="{ parts: [ {path: 'dashboard>Ename'} ], formatter: '.Empforc'}"/> -->
+									</t:template>
+								</t:Column>
+								<t:Column >
+									<Label text="Appraisal From Date" design="Bold" wrapping="true"/>
+									<t:template>
+										<Text text="{dashboard>Begda}" wrapping="true"/>
+									</t:template>
+								</t:Column>
+								<t:Column >
+									<Label text="Appraisal To Date" design="Bold"/>
+									<t:template>
+										<Text text="{dashboard>Endda}" wrapping="true"/>
+									</t:template>
+								</t:Column>
+								<t:Column >
+									<Label text="Document Name" design="Bold" wrapping="true"/>
+									<t:template>
+										<Text text="{dashboard>ZzdocName}" wrapping="true"/>
+									</t:template>
+									</t:Column>
+								<t:Column >
+									<Label text="Status" design="Bold" wrapping="true"/>
+									<t:template>
+									<!-- <tnt:InfoLabel id="il8" text="{dashboard>Status}"  width = "140px"   /> -->
+									<tnt:InfoLabel text="{ parts: [ {path: 'dashboard>Zzstatus'} ], formatter: '.statustext'}"
+											displayOnly="true"
+											colorScheme="{ parts: [ {path: 'dashboard>Zzstatus'} ], formatter: '.statusColor'}"
+											/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+								<Label text="Reporting Officer" design="Bold" wrapping="true"/>
+								<t:template>
+								<Text text="{dashboard>ZzreportAuth}" wrapping="false"/>
+								</t:template>
+								</t:Column>
+								<t:Column hAlign="Center">
+								<Label text="Reviewing Officer" design="Bold" wrapping="true"/>
+								<t:template>
+								<Text text="{dashboard>ZzreviewAuth}" wrapping="false"/>
+								</t:template>
+								</t:Column>
+								<t:Column hAlign="Center">
+								<Label text="Accepting Authority" design="Bold" wrapping="true"/>
+								<t:template>
+								<Text text="{dashboard>ZzacceptAuth}" wrapping="false"/>
+								</t:template>
+								</t:Column>
+								<t:Column hAlign="Center" visible="{= ${dashboard>Zzdisplay} !== 'X'}">
+								<Label text="Edit" design="Bold"/>
+								<t:template>
+								 <core:Icon src="sap-icon://edit"  press="employeedetailsflag"/>
+								</t:template>
+								</t:Column>
+								<t:Column hAlign="Center" visible="{= ${dashboard>Zzdisplay} === 'X'}">
+								<Label text="Display Mode" design="Bold"/>
+								<t:template>
+								 <core:Icon src="sap-icon://display"  press="employeedetailsflag"/>
+								</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+					</content>
+						<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<!-- <core:Icon src="sap-icon://create-form" type="Emphasized" press="register" size="1.7rem"/> -->
+						
+					</OverflowToolbar>
+				</footer> 
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

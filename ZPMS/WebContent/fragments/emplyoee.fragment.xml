@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	 <Dialog
+		title="Employee Details"
+		contentWidth="20%">
+		<buttons>
+		
+		<button text="Close" press="dclose" type="close" ></button>
+	</buttons>
+		<Panel>
+		<core:Icon src="sap-icon://employee"  color="black" size="8rem"/>
+		<f:SimpleForm editable="true" title="{pmsmodel>/pmsdetails/Uname}">
+		<f:content>
+		
+		<Label text="Employee ID"/>
+		<Text text="{pmsmodel>/pmsdetails/Pernr}"/>
+		<Label text="Designation" design="Bold"/>
+		<Text text="{pmsmodel>/pmsdetails/Zzdesignation}" />
+		 <Label text="Date Of Birth" design="Bold"/>
+		<Text text="{pmsmodel>/pmsdetails/Zzdob}"/> 
+		</f:content>
+		
+		
+		</f:SimpleForm>
+		</Panel>
+		
+		</Dialog> 
+		</core:FragmentDefinition>
