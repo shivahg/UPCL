@@ -1,0 +1,64 @@
+<mvc:View controllerName="Zsalary_struct.Zsalary_struct.controller.salary_struct" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="Salary Information">
+					<content>
+						<f:SimpleForm title="Salary Information" id="con" editable="true" layout="ResponsiveGridLayout"  breakpointL="1024" breakpointM="600"
+						breakpointXL="1440" labelSpanXL="4" labelSpanL="4" labelSpanM="2" labelSpanS="2" adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+						emptySpanM="1" emptySpanS="1" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+							<f:content>
+								<core:Title text=""/>
+							  
+								<Label design="Bold" text="Employee Code"/>
+								<Input id="ec" value="{salaryhmodel>/0/Pernr}" editable="false" />
+								<Label design="Bold" text="Employee Name"/>
+								<Input id="name" value="{salaryhmodel>/0/Name}" editable="false"/>
+								<Label design="Bold" text="Designation"/>
+								<Input id="des" value="{salaryhmodel>/0/Designation}" editable="false"/>
+								<!-- <Label text="GPF NO" design="Bold"/>
+								<Input id="gfno" value="{salarymodel>/0/Gpfno}"/> -->
+								
+								
+							
+						                <core:Title text=""/>
+						                
+								<Label design="Bold" text="Date"/>
+								<DatePicker  id="sd" value="{salaryhmodel>/0/Cdate1}" editable="false"/>
+								<Label design="Bold" text="Office"/>
+								<Input id="of" value="{salaryhmodel>/0/Office}" editable="false"/>
+								<Label text="PayScale" design="Bold"/>
+								<Input id="ps" value="{salaryhmodel>/0/Payscale}" editable="false"/>
+								<Label text="Date of Next Increment " design="Bold"/>
+								<Input id="nli" value="{salaryhmodel>/0/Cdate}" editable="false"/>
+								</f:content>
+						</f:SimpleForm>
+						<Table id="wt" items="{salarymodel>/}">
+							<columns>
+							<Column hAlign="Center">
+									<Label design="Bold" text="Wage Type"/>
+								</Column>
+							<Column hAlign="Center">
+									<Label design="Bold" text="Amount"/>
+								</Column>
+								
+									
+									<Column hAlign="Center">
+									<Label design="Bold" text="Currency"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+								<Text text="{salarymodel>Lgtxt}"/>
+								    <Text text="{salarymodel>Bet01}"/>
+									<Text text="{salarymodel>Waers}"/>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
