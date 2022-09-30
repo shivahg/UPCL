@@ -1,0 +1,465 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="ZMedical_App.ZMedical_App.controller.emp_medical_form" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified">
+	<App>
+		<pages> 
+			<Page title="Medical Reimbursement Application" showNavButton="true" navButtonPress="backpage">
+		
+				<content>
+					<OverflowToolbar class = "MTB" visible="{= ${medicalmodel>/0/Zreqtyp}!=='6'}">
+			    <RadioButton text="Medical Permission" selected="true" select="med_permission" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}" visible="{= ${medicamodel>/0/Zreqtyp}!=='5'}"/>
+				<!-- <RadioButton text="Medical Advanvce" select="medical_advance" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}" visible="{= ${medicamodel>/0/Zreqtyp}!=='5'}"/> -->
+				<RadioButton text="Medical Permission With Advance" select="medical_per_adv" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}" visible="{= ${medicamodel>/0/Zreqtyp}!=='5'}"/>
+				
+				 
+				
+				</OverflowToolbar>
+				<OverflowToolbar>
+				<ToolbarSpacer/>
+							<Label text="Attachment For: " design="Bold"
+								visible="{dashboard>/isEditable}" />
+							<ComboBox id="attachcombo"
+									 items="{attdata>/}">
+								<core:Item text="{attdata>file}" />
+							</ComboBox>
+							<u:FileUploader id="fileUploader" name="myFileUpload"  tooltip="Upload your file to the local server"
+								placeholder="Choose a file for Upload..." visible="true" fileType="pdf,jpg,png,jpeg">
+								<u:parameters>
+									<u:FileUploaderParameter name="Accept-CH" value="Viewport-Width"/>
+									<u:FileUploaderParameter name="Accept-CH" value="Width"/>
+									<u:FileUploaderParameter name="Accept-CH-Lifetime" value="86400"/>
+								</u:parameters>
+							</u:FileUploader>
+							<Button text="Upload File" press="handleUploadPress" visible="{dashboard>/isEditable}"/> 
+				</OverflowToolbar>
+					<IconTabBar
+		id="idIconTabBar"
+		select=".onFilterSelect"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter
+			
+				icon="sap-icon://create-form"
+				text="Create Form"
+				iconColor="Positive"
+				key="1" >
+			
+					<Panel id="1">
+					
+					
+						
+				<tnt:InfoLabel id="il9" text="Medical Permission is not required for disease such as Cancer, Kidney, Renal Failure" visible="{= ${medicalmodel>/0/Zreqtyp}==='4'}" />
+						<tnt:InfoLabel id="il10" text="Once approved, bill to be submitted for reimbursement within 6 months from the date of approval" visible="{= ${medicalmodel>/0/Zreqtyp}==='5'}" />
+						
+					<f:SimpleForm title="Medical Details" id="con" editable="true" layout="ResponsiveGridLayout" breakpointL="1024" breakpointM="600"
+						breakpointXL="1440" labelSpanXL="4" labelSpanL="4" labelSpanM="2" labelSpanS="2" adjustLabelSpan="true" emptySpanXL="2" emptySpanL="2"
+						emptySpanM="1" emptySpanS="1" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+						<f:content>
+							<core:Title text=""/>
+							
+							
+								<Label design="Bold" text="Details of Medical Advance" required="true"/>
+							<Input id="mdv" value="{medicalmodel>/0/Mreqno}" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+							visible="{= ${medicalmodel>/0/Zreqtyp}==='2' }" valueHelpRequest="med_advance" showValueHelp="true"
+							/>
+							<Link id="mreq" text="{medicalmodel>/0/Mreqno}" press="handleLinkPress" visible="{= ${medicalmodel>/0/Zreqtyp}==='2' }"/>
+							
+							
+							
+							 <Label design="Bold" text="Permission Number" />
+							<Link id="mreq1" text="{medicalmodel>/0/Opreqno}" press="handleLinkPress" visible="{= ${medicalmodel>/0/Opreqno}!== '00000000'}"/>
+						
+							 <!-- <Label design="Bold" text="Reimbursement Type" required="true"/>
+							<ComboBox  id="rbtype" visible="{= (${medicalmodel>/0/Zreqtyp}==='1') || (${medicalmodel>/0/Zreqtyp}==='2') || (${medicalmodel>/0/Zreqtyp}==='3')
+							|| (${medicalmodel>/0/Zreqtyp}==='5') }"
+								items="{ path:'/data1', templateShareable:false }" selectedKey="{medicalmodel>/0/Reimtype}"    selectionChange="Reimbursement_change"
+								editable="{=${medicalmodel>/0/Action} === 'S'|| ${medicalmodel>/0/Action} === ''}" value="{medicalmodel>/0/Reimtype}">
+								<core:Item text="{type2}" key="{type2}" />
+							</ComboBox>  -->
+							
+							<Label design="Bold" text="Request Type" required="true"/>
+							<ComboBox  id="reqtype"
+								items="{reqdata>/}" selectedKey="{medicalmodel>/0/Reimtype}"    selectionChange="Requesttype"
+								editable="{=${medicalmodel>/0/Action} === 'S'|| ${medicalmodel>/0/Action} === ''}" value="{medicalmodel>/0/Reimtype}">
+								<core:Item text="{reqdata>typereq}" key="{reqdata>typereq}" />
+							</ComboBox>
+							
+							
+							<!-- 
+							<Label design="Bold" text="Claim Type" required="true"/>
+							<ComboBox  id="cltype" visible="{= ${medicalmodel>/0/Zreqtyp}==='6'}"
+								items="{ path:'/data1', templateShareable:false }" selectedKey="{medicalmodel>/0/Claimtype}"
+								editable="{=${medicalmodel>/0/Action} === 'S'|| ${medicalmodel>/0/Action} === '' || ${medicalmodel>/0/Zreqtyp}==='6'
+								|| ${medicalmodel>/0/Opreqno}!== '00000000'}" value="{medicalmodel>/0/Claimtype}">
+								<core:Item text="{type4}" key="{type4}" />
+							</ComboBox> -->
+							
+							
+							
+							
+							<Label design="Bold" text="Employee Code No" required="false"/>
+							<Input id="ecno" value="{medicalmodel>/0/Pernr}" editable="false"/>
+							
+							<Label design="Bold" text="Health Card No" required="false"/>
+							<Input id="hcno" value="{medicalmodel>/0/Hcard}" editable="false"/>
+							
+							<Label text="Patient Details" design="Bold" required="true"/>
+							<Input id="pd" valueHelpRequest="patientdetails" showValueHelp="true"
+							value="{medicalmodel>/0/Patient}"  editable="{=  ${medicalmodel>/0/Action} === 'S'|| ${medicalmodel>/0/Action} === ''}"/>
+							<Label design="Bold" text="Hospital Location" required="true"/>
+							
+							<ComboBox editable="{=  ${medicalmodel>/0/Action} === 'S'  || ${medicalmodel>/0/Action} === ''}" id="hloc"
+								items="{ path:'/data1', templateShareable:false }" selectedKey="{medicalmodel>/0/HospitalLoc}"
+								selectionChange="location_change" value="{medicalmodel>/0/HospitalLoc}" visible="{=  ${medicalmodel>/0/Reimtype}=== 'Indoor Treatment' ||
+								 ${medicalmodel>/0/Reimtype}=== 'Outdoor Treatment'}">
+								<core:Item text="{type}" key="{type}"/>
+							</ComboBox>
+							<!-- <Label design="Bold" text="Medical Permission Number" required="true"/>
+							
+							<Input id="mpno" value="{medicalmodel>/0/Mreqno}" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+							 valueHelpRequest="medical_pno" showValueHelp="true"    visible="false"/> -->
+							 
+							<Label design="Bold" text="Name Of Hospital/Address of Hospital" required="true"/>
+							<Input id="addhos" value="{medicalmodel>/0/Hospital}" showValueHelp="true" valueHelpRequest="Address"
+							editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}" liveChange="hospital_address"
+							 visible="{=  ${medicalmodel>/0/Reimtype}=== 'Indoor Treatment' ||
+								 ${medicalmodel>/0/Reimtype}=== 'Outdoor Treatment'}"/>
+							
+							<Label text="PayScale" design="Bold" required="false"/>
+							<Input id="paysc"  value="{medicalmodel>/0/Payscale}" visible="{= ${medicalmodel>/0/Zreqtyp}!=='6'}" editable="false"/>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							<core:Title text=""/>
+							
+							
+							<Label design="Bold" text="Employee Name" required="false"/>
+							<Input id="ename" value="{medicalmodel>/0/Name}" editable="false" />
+							
+							<Label text="Date" design="Bold" required="true"/> 
+							<DatePicker id="cdate" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+								value="{path:'medicalmodel>/0/Cdate',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"/>
+							
+							
+							
+							
+							
+							<Label design="Bold" text="Name Of Disease" required="true"/>
+							<Input id="ndise" value="{medicalmodel>/0/Desease}" 
+							editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}" showValueHelp="true" 
+							valueHelpRequest="Name_Desease"  visible="{=  ${medicalmodel>/0/Reimtype}=== 'Indoor Treatment' ||
+								 ${medicalmodel>/0/Reimtype}=== 'Outdoor Treatment'}"/>
+							
+							
+							<Label text="Estimated Date of Hospitalization" design="Bold" required="true"/> 
+							<DatePicker id="estimatedate" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+								value="{path:'medicalmodel>/0/Esthospdate',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"
+								visible="{= ${medicalmodel>/0/Zreqtyp}==='1' || ${medicalmodel>/0/Zreqtyp}==='5' }"/>
+								
+								<Label text=" Date of Admission" design="Bold" required="true"/> 
+							<DatePicker id="dad" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''
+							 || ${medicalmodel>/0/Status}!== 'Request Pending with Manager'
+							|| ${medicalmodel>/0/Status}!== 'Request Pending with Employee'}"
+								value="{path:'medicalmodel>/0/Doadmin',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"
+								visible="{= (${medicalmodel>/0/Zreqtyp}==='6' &amp;&amp; ${medicalmodel>/0/Reimtype}==='Indoor Treatment')
+								|| (${medicalmodel>/0/Zreqtyp}==='6' &amp;&amp; ${medicalmodel>/0/Reimtype}==='Outdoor Treatment') }"/>
+							
+							<Label text=" Date of Discharge" design="Bold" required="true"/> 
+							<DatePicker id="ddis" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''
+							|| ${medicalmodel>/0/Action} === '' || ${medicalmodel>/0/Opreqno}=== '00000000' }"
+								value="{path:'medicalmodel>/0/Dodisch',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'yyyy/MM/dd' } }"
+								visible="{=  (${medicalmodel>/0/Zreqtyp}==='6' &amp;&amp; ${medicalmodel>/0/Reimtype}==='Indoor Treatment')
+								|| (${medicalmodel>/0/Zreqtyp}==='6' &amp;&amp; ${medicalmodel>/0/Reimtype}==='Outdoor Treatment')}"/>
+								
+								<Label design="Bold" text="Advance Amount"/>
+								<Input value="{medicalmodel>/0/Advamt}" editable="false" visible="{= (${medicalmodel>/0/Zreqtyp}==='6' &amp;&amp; ${medicalmodel>/0/Reimtype}==='Indoor Treatment')
+								|| (${medicalmodel>/0/Zreqtyp}==='6' &amp;&amp; ${medicalmodel>/0/Reimtype}==='Outdoor Treatment')}"/>
+							
+							<Label design="Bold" text="{amtmodel>/0/at}" required="true"/>
+							
+							<Input id="estamt" value="{medicalmodel>/0/Estamount}" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === '' || ${medicalmodel>/0/Opreqno}=== '00000000' }"
+							visible="{=  ${medicalmodel>/0/Zreqtyp}==='5' || ${medicalmodel>/0/Zreqtyp}==='6'
+							|| ${medicalmodel>/0/Opreqno}!== '00000000'}"/>
+							
+							
+							
+							
+							
+							<Label design="Bold" text="Total Amount Claimed" required="true"/>
+							<Input id="tamt" value="{medicalmodel>/0/Estamount}" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+							visible="{= ${medicalmodel>/0/Zreqtyp}==='2' || ${medicalmodel>/0/Zreqtyp}==='3'}"/>
+							
+				           <Label design="Bold" text="Wheather Prior Permission was Taken For Treatment
+				           if Required" required="true"/>
+							<ComboBox  id="wppt"
+								items="{ path:'/data', templateShareable:false }" selectedKey="{medicalmodel>/0/Preper}"  visible="{= ${medicalmodel>/0/Zreqtyp}==='2' || ${medicalmodel>/0/Zreqtyp}==='3'}"
+								editable="{=${medicalmodel>/0/Action} === 'S'|| ${medicalmodel>/0/Action} === ''}" value="{medicalmodel>/0/Preper}">
+								<core:Item text="{type3}" key="{type3}" />
+							</ComboBox>
+						
+						<Label design="Bold" text="Name Of Refrred Hospital" required="true"/>
+							<Input id="rh" value="{medicalmodel>/0/Namerefhosp}" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+							visible="{=  ${medicalmodel>/0/Reimtype}=== 'Indoor Treatment' ||
+								 ${medicalmodel>/0/Reimtype}=== 'Outdoor Treatment'}"/>
+						
+						<Label design="Bold" text="Nature of Treatment " required="true"/>
+							<Input id="nt" value="{medicalmodel>/0/Nattreat}" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''}"
+							visible="{= ${medicalmodel>/0/Zreqtyp}==='4' || ${medicalmodel>/0/Zreqtyp}==='5'}"/>
+						
+						
+					   <Label design="Bold" text="Employee Comments" required="true"/>
+						<TextArea id="ecom" rows="3" value="{medicalmodel>/0/Empcomm}" editable="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === ''
+						|| ${medicalmodel>/0/Opreqno}=== '00000000'}"/> 
+						</f:content>
+					</f:SimpleForm>
+					
+					
+					
+					
+					</Panel>
+					</IconTabFilter>
+					<IconTabSeparator />
+		
+					<IconTabFilter
+				icon="sap-icon://attachment"
+				iconColor="Positive"
+				text="Attachments"
+				key="2" >
+				<!-- <Table id="attachments" items="{Fileattachment>/}">
+				<columns>
+				<Column >
+				<Label text="File Name"/>
+				</Column>
+				<Column>
+				<Label text="Download"/>
+				</Column>
+				</columns>
+				<items>
+				<ColumnListItem>
+				<Text text="{Fileattachment>fn}"/>
+				<Button icon="sap-icon://download" type="Emphasized" press="Download"/>
+			
+				</ColumnListItem>
+				</items>
+				</Table> -->
+				
+				
+				<Table id="attachment"
+										items="{AttachModel>/UploadedAttachment}" class="dashboard">
+										<columns>
+											<Column class="dashboard">
+												<Label text="File Name" />
+											</Column>
+											<Column>
+												<Label text="File For" />
+											</Column>
+
+											<Column class="" width="60px">
+												<Label text="" />
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Navigation"
+												press="onfilePress" class="dashbord">
+												<Text text="{AttachModel>Filename}" />
+												<Text text="{AttachModel>Descr}" />
+												<core:Icon
+													src="{
+												parts: [
+													{path: 'AttachModel>Filename'}
+												],
+												formatter: '.fnSetIcon'
+											}"
+													color="{
+												parts: [
+													{path: 'AttachModel>Filename'}
+												],
+												formatter: '.fnSetIconColor'
+											}"
+													size="21px"></core:Icon>
+											</ColumnListItem>
+										</items>
+
+									</Table>
+				
+				
+				
+				</IconTabFilter>
+					
+					</items>
+		</IconTabBar>
+					
+					<f:SimpleForm title="Approvers" id="app" editable="true" layout="ResponsiveGridLayout"
+					visible="{= ${medicalmodel>/0/Status}!=='EM'}" class="header">
+							<f:content>
+								
+								
+							
+							
+								<Label design="Bold" text="Sanction Amount"/>
+								<Input id="sa" width="50%" value="{medicalmodel>/0/Sancamt}" editable="false" visible="{= ${medicalmodel>/0/Zreqtyp}!=='4'}" />
+								
+							    
+								
+								
+								
+								<Label design="Bold" text="Approvers Comments" />
+								<TextArea rows="3" id="A1" width="50%" value="{medicalmodel>/0/Mcomments}" 
+								editable="false"/>
+								
+							<!-- 	<Label design="Bold" text="Is It last level"/>
+							     <CheckBox id="ll" select="lastlevel" /> -->
+							     
+							     <Label design="Bold" text="Next Level Approvers"  />
+							     <Input id="nlaa" showValueHelp="true" width="50%"
+							     valueHelpRequest="nextlevelapprovers" liveChange="onsuggest_plant"
+							     editable="false" value="{medicalmodel>/0/Mpernr}"/>
+							
+								<Label design="Bold" text="Pass Amount" />
+								<Input id="paa"  width="50%" value="{medicalmodel>/0/Passamt}" 
+								editable="false" visible="{= ${medicalmodel>/0/Zreqtyp}!=='4'}"/>
+								
+								
+								<Label design="Bold" text="Final Approvers Comments"/>
+								<TextArea rows="3" id="A2" width="50%" value="{medicalmodel>/0/Facomments}"
+								 visible="true" editable="false"/>
+						
+							   
+							     
+								 
+								
+							</f:content>
+						</f:SimpleForm>
+						
+						<!-- <Table id="dfiles" items="{attachments>/}">
+						
+							<headerToolbar>
+								<OverflowToolbar class = "MTB">
+										<Title text="Download Files"/>
+										<ToolbarSpacer/>
+										
+								</OverflowToolbar>
+							</headerToolbar>
+							
+						<columns>
+							
+								<Column hAlign="Center">
+								<Text text="Enclosure Details"/>
+							</Column> 
+							<Column hAlign="Center"> 
+								<Text text="Download"/>
+							</Column> 
+							 <Column hAlign="Center">
+								<Text text="Guidelines"/>
+							</Column>
+							<Column hAlign="Center"> 
+								<Text text="Download"/>
+							</Column> 
+								 <Column hAlign="Center">
+								<Text text="Forms"/>
+							</Column>
+								<Column hAlign="Center"> 
+								<Text text="Download"/>
+							</Column>  
+							 
+							
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+								
+								
+										<Label text="{attachments>Filename}" />
+										<Button type="Emphasized" icon="sap-icon://download" size ="1rem" press="Download" id="E"/>
+										<Label text="aaaaaaaa"/>
+										<Button type="Emphasized" icon="sap-icon://download" size ="1rem" press="Download" id="G"/>
+										<Label text="aaaaaaaa"/>
+									    <Button type="Emphasized" icon="sap-icon://download" size ="1rem" press="Download" id="F"/>
+										
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					
+					
+					
+							<Table id="files" >
+						
+							<headerToolbar>
+								<OverflowToolbar class="MTB">
+										<Title text="Upload Files"/>
+										<ToolbarSpacer/>
+										
+								</OverflowToolbar>
+							</headerToolbar>
+							
+						<columns>
+							
+								<Column hAlign="Center">
+								<Text text="Enclosure Details"/>
+							</Column> 
+							<Column hAlign="Center"> 
+								<Text text="Upload"/>
+							</Column> 
+							 <Column hAlign="Center">
+								<Text text="Guidelines"/>
+							</Column>
+							<Column hAlign="Center"> 
+								<Text text="Upload"/>
+							</Column> 
+								 <Column hAlign="Center">
+								<Text text="Forms"/>
+							</Column>
+								<Column hAlign="Center"> 
+								<Text text="Upload"/>
+							</Column>  
+							 
+							
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+								
+								
+										<Label text="aaaaaa"/>
+										<Button type="Emphasized" icon="sap-icon://upload" size ="1rem" press="Upload" id="EU"/>
+										<Label text="aaaaaaaa"/>
+										<Button type="Emphasized" icon="sap-icon://upload" size ="1rem" press="Upload" id="GU"/>
+										<Label text="aaaaaaaa"/>
+									    <Button type="Emphasized" icon="sap-icon://upload" size ="1rem" press="Upload" id="FU"/>
+										
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+						 -->
+						
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						
+						<Button id="save" text="Save" type="Emphasized" press="Save" visible="{=  (${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === '')}"/>
+						<Button  id= "submit" text="Submit" type="Emphasized" press="Submit" visible="{=  ${medicalmodel>/0/Action} === 'S' || ${medicalmodel>/0/Action} === '' }"/>
+						
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

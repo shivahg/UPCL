@@ -1,0 +1,21 @@
+.MTB {
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    height: 3rem;
+    background: #c2dbf1;
+}
+
+.header {
+    font-size: 1.4rem;
+    background-color: #c2dbf1;
+}
+.pdfDialog iframe{
+    width:100% !important; 
+}
