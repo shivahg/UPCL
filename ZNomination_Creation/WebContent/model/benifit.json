@@ -1,0 +1,20 @@
+   {
+	          
+	          "benifittype":[
+	          {
+	          "type": "BNGR:Gratuity Benefit"
+	          },
+	          {
+	          "type": "BNPF:PF Benefit"
+	          },
+	          {
+	          "type": "BNPN:Pension Benefit"
+	          },
+	          {
+	          "type": "Z001:Commutation Benefit"
+	          },
+	           {
+	          "type": "Z002:Deceased Nomination"
+	          }
+	          ]
+	          }

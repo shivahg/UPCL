@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	 <Dialog
+		title="Benifit Types"
+		contentWidth="35%">
+		
+		<MessageStrip type="Warning" enableFormattedText="true" text="** Please Select Benifit Types" showIcon="true" showCloseButton="false"
+									class="sapUiTinyMarginTop"></MessageStrip>
+		<buttons>
+		
+		<!-- <button text="ADD" press="Add_nomineedetails" type="Emphasized" ></button> -->
+		
+		<button text="Close" press="navtodashboard" type="Reject"></button> 
+	    </buttons>
+		
+		
+		<f:SimpleForm editable="true" >
+		<f:content>
+		 <List id="List" items="{benifitmodel>/}" selectionChange=".fnlistSelectionChagne">
+                        	<items>
+							<StandardListItem class="listCss"  id="btypedisplay" wrapping="true"
+							icon="sap-icon://account"
+							iconDensityAware="true"
+							iconInset="false"  type="Navigation" press="btype_selection" title="{benifitmodel>type}">
+					        </StandardListItem>
+							</items>
+						</List> 
+		
+	    </f:content>
+		
+		
+		</f:SimpleForm>
+	
+		
+		</Dialog> 
+		</core:FragmentDefinition>

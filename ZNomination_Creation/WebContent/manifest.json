@@ -1,0 +1,115 @@
+{
+  "_version": "1.32.0",
+  "sap.app": {
+    "id": "ZENOC.zemployeenoc",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "ach": "ach"
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "ZENOC.zemployeenoc.view.Navigation",
+      "type": "XML",
+      "async": true,
+      "id": "Main"
+    },
+    	"config": {
+			"fullWidth": true
+		},
+    "dependencies": {
+			"minUI5Version": "1.95.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ZENOC.zemployeenoc.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "ZENOC.zemployeenoc.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+      {"name": "Navigation",
+          "pattern": "Navigation",
+          "target": ["Navigation"]},
+        {
+          "name": "Dashboard",
+          "pattern": "Dashboard",
+          "target": ["Dashboard"]
+        },
+         {
+          "name": "Empdetails",
+          "pattern": "Empdetails/{reqno}/{param}",
+          "target": ["Empdetails"]
+        }
+      ],
+      "targets": {
+        "Dashboard": {
+          "viewType": "XML",
+          "viewName": "Dashboard",
+          "controlId": "Main"
+        },
+        "Empdetails": {
+          "viewType": "XML",
+          "viewName": "Empdetails",
+          "controlId": "Main"
+        },
+        "Navigation": {
+          "viewType": "XML",
+          "viewName": "Navigation"
+          
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,374 @@
+<mvc:View
+    controllerName="ZENOC.zemployeenoc.controller.Empdetails"
+    xmlns:c="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:t="sap.ui.table"
+	xmlns:tnt="sap.tnt"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:w="sap.ui.integration.widgets"
+	xmlns:f="sap.f">
+	
+		<App >
+			<pages>
+				<Page id="page" title="Nomination Process" showNavButton="true" navButtonPress="backnav">
+				
+               <content>
+                    
+									
+								<Panel id="p2" visible="true" backgroundDesign="Translucent" class="panelPaddingRemove"
+						headerText="">
+						<OverflowToolbar id="attachmentSec">
+							<core:Icon src="sap-icon://request" size="23px"
+								color="#0a6ed1"></core:Icon>
+							<Text text="#Request: {NominationModel>/Zreqno}" id="reqs" />
+							 <tnt:InfoLabel id="sts"
+								text="{
+												parts: [
+													{path: 'NominationModel>/Status'}
+												],
+												formatter: '.statusText'
+											}"
+								displayOnly="true"
+								colorScheme="{
+												parts: [
+													{path: 'NominationModel>/Status'}
+												],
+												formatter: '.statusColor'
+											}" /> 
+							<ToolbarSpacer />
+							<!-- <Label text="Attachment For: " design="Bold"
+								visible="{dashboard>/isEditable}" />
+							<ComboBox
+									width="160px"
+									wrapItemsText="true"
+									visible="{dashboard>/isEditable}"
+									items="{dashboard>/UploadList}" id="idAttachFor">
+								<core:Item text="{dashboard>uploadType}" />
+							</ComboBox>
+							<u:FileUploader id="fileUploader"
+								name="myFileUpload" uploadUrl="FileSet/"
+								tooltip="Upload your file to the local server"
+								uploadComplete="handleUploadComplete" change="handleValueChange"
+								typeMissmatch="handleTypeMissmatch" style="Emphasized"
+								placeholder="Choose a file for Upload..."
+								visible="{dashboard>/isEditable}" fileType="pdf,jpg,png,jpeg" >
+								<u:parameters>
+									<u:FileUploaderParameter
+										name="Accept-CH" value="Viewport-Width" />
+									<u:FileUploaderParameter
+										name="Accept-CH" value="Width" />
+									<u:FileUploaderParameter
+										name="Accept-CH-Lifetime" value="86400" />
+								</u:parameters>
+							</u:FileUploader>
+							<Button text="Upload File" press="handleUploadPress"
+								visible="{dashboard>/isEditable}" />
+							<Button icon="sap-icon://pdf-attachment" visible="{= ${dashboard>/Single_Record/Status} ? true : false}"
+								press="fnPdfDownload" ></Button>
+							<Button icon="sap-icon://message-popup"
+								press="fnShowNotification" ></Button> -->
+						</OverflowToolbar>
+						<IconTabBar id="idicon" expanded="true"
+							class="sapUiResponsiveContentPadding" select="onselect">
+							<items>
+								<IconTabFilter key="notes"
+									icon="sap-icon://create-form" iconColor="Positive">
+										<form:SimpleForm class="nocClass"
+											editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+											labelSpanL="4" labelSpanM="4" labelSpanS="12"
+											adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+											emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2"
+											columnsM="2" singleContainerFullSize="false" id="personInfo"
+											title="Personal Information">
+											<form:content>
+												<c:Title text="" />
+												<Label text="Employee Name" />
+												<Text editable="false"
+													text="{NominationModel>/Name}" />
+												<Label text="Designation" />
+												<Text editable="false"
+													text="{NominationModel>/Designation}" />
+
+												<c:Title text="" />
+												<Label text="Employee Id"/>
+												<Text editable="false"
+													text="{NominationModel>/Pernr}" />
+												<Label text="Place of Posting" />
+												<Text editable="false"
+													text="{NominationModel>/Office}" />
+											</form:content>
+										</form:SimpleForm>
+
+                                        
+                                       
+                                  
+                                  <form:SimpleForm editable="true" title="Nominee's Details"  width="100%">
+		                        <form:content>
+		                        <core:Title text=""/>
+		                         <Table id="tbbenifittype"
+										items="{path:'NominationModel>/nomi_itemset'}"   sticky="ColumnHeaders"  
+										mode="Delete" delete="handleDelete" width="100%" >
+										<infoToolbar>
+										<Toolbar>
+											 
+											    <Label text="Benifit Type" design="Bold"/>
+											    
+											      <tnt:InfoLabel id="infobtyp"
+								text="{NominationModel>/Rtext}"
+								displayOnly="true"
+								colorScheme="9" /> 
+                     <!-- <ComboBox
+					editable="{= ${NominationModel>/Onlydispay}!=='X'}" visible="true" width="15%"
+					 id="benifittype" 
+				items="{
+				path:'benifitmodel>/'}" 
+				selectionChange="RequestType" selectedKey="{NominationModel>/Rtext}">
+				<core:Item  text="{benifitmodel>type}"  key="{benifitmodel>type}"/>
+					</ComboBox>  -->
+								<!-- 	<Select
+							
+						     id="benifittype"
+							forceSelection="false"
+							selectedKey="{NominationModel>/Rtext}"  width="15%"
+							items="{
+						 path:'benifitmodel>/',
+						 templateShareable:false
+						 }" editable="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/ReqType} ==='E'}" change="Get_BenifitType">
+						<core:Item text="{benifitmodel>type}"  key="{benifitmodel>Key1}" />
+					</Select> -->
+					
+					
+											 
+											         <ToolbarSpacer/>
+                            
+					<Button text="ADD Nominee" icon="sap-icon://family-protection" type="Emphasized" press="Create_Nominee"
+					visible="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/ReqType} ==='E'}"/>
+										</Toolbar>
+									</infoToolbar>
+										<columns>
+										
+											<Column class="dashboard" width="20%" hAlign="Center">
+												<Label text="Nominee" wrapping="true"/>
+											</Column>
+											<!-- <Column width="35%" hAlign="Center">
+												<Label text="Nominee's Address" wrapping="true"/>
+											</Column> -->
+											<Column width="15%" hAlign="Center">
+												<Label text="Relation" wrapping="true"/>
+											</Column>
+
+											<Column width="20%" hAlign="Center">
+												<Label text="Birth Date" wrapping="true"/>
+											</Column>
+											<Column class="Content" width="10%" hAlign="Center">
+												<Label text="Share" wrapping="true"/>
+											</Column>
+
+                                           <!--  <Column class="dashboard" width="35%" hAlign="Center">
+												<Label text="Guardian's Address" wrapping="true" />
+											</Column> -->
+											<!-- <Column width="15%" hAlign="Center">
+												<Label text="PAN NO" wrapping="true"/>
+											</Column> -->
+											<!-- <Column width="15%" hAlihn="Center">
+												<Label text="Aadhar No" wrapping="true"/>
+											</Column> -->
+
+											<!-- <Column  width="25%" hAlign="Center">
+												<Label text="Bank Name" wrapping="true"/>
+											</Column> -->
+											<!-- <Column class="Content" width="17%" hAlign="Center">
+												<Label text="IFSC" wrapping="true"/>
+											</Column> -->
+										 	<!-- <Column class="Content" width="17%" hAlign="Center">
+												<Label text="Handicap" wrapping="true"/>
+											</Column>  -->
+								             <!-- <Column class="Content" width="17%" hAlign="Center">
+											
+											</Column> --> 
+											  <Column class="Content" width="17%" hAlign="Center" visible="{= ${NominationModel>/ReqType} ==='E'}">
+											
+											</Column> 
+										</columns>
+										<items>
+											<ColumnListItem press="extendreqtype" type="Navigation">
+											    
+												<Text text="{NominationModel>Zznominee1}" wrapping="true" />
+												<!-- <Text  text="{NominationModel>Add01}" wrapping="true" /> -->
+												<Text text="{NominationModel>Rel01}" wrapping="true" />
+												<Text text="{path:'NominationModel>Dat01',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'dd/MM/yyyy' } }"
+						   		                wrapping="true" />
+							
+                            <Text text="{NominationModel>Shp01}" wrapping="true" />
+                           <!--  <Text  text="{NominationModel>Gra01}"  wrapping="true" />
+                            <Text text="{NominationModel>Zzpanno1}" wrapping="true" />
+                            <Text text="{NominationModel>Zzadharno1}" wrapping="true" />
+                            <Text text="{NominationModel>Zzbankname1}" wrapping="true" />
+                            <Text text="{NominationModel>Zzifsc1}" wrapping="true" />
+						    <Input value="{NominationModel>Zzhandicap1}" wrapping="true" editable="{= ${NominationModel>/Onlydispay}!=='X'}"/>
+						    <Text text="{NominationModel>Zzhandicap1}" wrapping="true"/> -->
+						  <!--   <Link text="more.." press="extendreqtype"/> -->
+						 		<core:Icon src="sap-icon://edit" press="Modify_record" />
+											</ColumnListItem>
+										</items>
+
+									</Table>
+                                  
+                                  
+                                  
+		     <core:Title text=""/>
+		     
+		    <form:SimpleForm class="nocClass"
+											editable="true" layout="ResponsiveGridLayout" labelSpanXL="4"
+											labelSpanL="4" labelSpanM="4" labelSpanS="12"
+											adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+											emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2"
+											columnsM="2" singleContainerFullSize="false" 
+											title="Nomination Details" id="nomi_det" visible="false">
+											<form:content>
+										
+											
+												<Label text="Nominee" design="Bold" icon="sap-icon://customer" />
+												<Text text="{btypemodel>/Zznominee1}"/>
+										
+		
+		<Label text="Relation" design="Bold" />
+		<Text text="{btypemodel>/Rel01}"/>
+		 <Label text="Date Of Birth" design="Bold" />
+		<Text text="{path:'btypemodel>/Dat01',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'dd/MM/yyyy' } }"
+						   		                wrapping="true" />
+		<Label text="Share" design="Bold" />
+		<Text text="{btypemodel>/Shp01}"/>
+		 
+		 <Label text="PAN No" design="Bold" />
+		 <Text text="{btypemodel>/Zzpanno1}"/> 
+		<Label text="Aadhar No" design="Bold" />
+		<Text text="{btypemodel>/Zzadharno1}"/> 
+		 <Label text="Bank Name" design="Bold" />
+		<Text text="{btypemodel>/Zzbankname1}"/> 
+		<Label text="IFSC" design="Bold"/>
+		<Text text="{btypemodel>/Zzifsc1}"/>
+		<Label text="Handicap" design="Bold" />
+		<Text text="{btypemodel>/Zzhandicap1}"/>
+			
+			<Label text="Nominee's Address" design="Bold" />
+		<Text text="{btypemodel>/Add01}"/>		
+		 <Label text="Guardians's Address" design="Bold"/>
+		<Text text="{btypemodel>/Gra01}"/>
+											</form:content>
+										</form:SimpleForm>
+		     
+		         
+		
+		</form:content>
+		
+		
+		</form:SimpleForm>
+		
+
+										
+								</IconTabFilter>
+								<IconTabSeparator icon="sap-icon://process" />
+								<IconTabFilter key="people"
+									icon="sap-icon://attachment" design="Horizontal"
+									text="Attachments">
+
+									<Table id="dashboardid"
+										items="{dashboard>/UploadedAttachment}" class="dashboard">
+										<columns>
+											<Column class="dashboard">
+												<Label text="File Name" />
+											</Column>
+											<Column>
+												<Label text="File For" />
+											</Column>
+											<Column>
+												<Label text="Uploaded Date" />
+											</Column>
+
+											<Column class="" width="60px">
+												<Label text="" />
+											</Column>
+											<Column class="Content" width="60px">
+												<Label text="" />
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Navigation"
+												press="onfilePress" class="dashbord">
+												<Text text="{dashboard>Filename}" />
+												<Text text="{dashboard>Type}" />
+												<HBox class="dateCss"
+													visible="{= !${dashboard>isCreated}}">
+													<core:Icon src="sap-icon://appointment-2"
+														color="#3181c7" />
+													<Text text="{dashboard>Datestamp}" />
+												</HBox>
+												<core:Icon
+													src="{
+												parts: [
+													{path: 'dashboard>Filename'}
+												],
+												formatter: '.fnSetIcon'
+											}"
+													color="{
+												parts: [
+													{path: 'dashboard>Filename'}
+												],
+												formatter: '.fnSetIconColor'
+											}"
+													size="21px"></core:Icon>
+												<Button icon="sap-icon://delete"
+													visible="{dashboard>isCreated}" press="onFileDelete"
+													type="Transparent"></Button>
+											</ColumnListItem>
+										</items>
+
+									</Table>
+								</IconTabFilter>
+							</items>
+						</IconTabBar>
+					</Panel>
+                    <form:SimpleForm title="Approvers" id="app" editable="true" layout="ResponsiveGridLayout" 
+                    visible="{=(${NominationModel>/Onlydispay}==='X' &amp;&amp; ${NominationModel>/ReqType} ==='E')
+                    ||  (${NominationModel>/ReqType} ==='M')}">
+							<form:content>
+								
+								
+							
+							
+								<Label design="Bold" text="Approver 1" required="true"/>
+								<TextArea rows="3" id="A1" width="50%" value="{NominationModel>/A1Comm}" 
+								editable="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/Zlevel}==='1'}" />
+								
+							    <Label design="Bold" text="Approver 2" required="true" visible="{= ${NominationModel>/Zlevel} === '2' }"/>
+								<TextArea rows="3" id="A2" width="50%" value="{NominationModel>/A2Comm}" 
+								editable="{= ${NominationModel>/Onlydispay}!=='X'}"  visible="{= ${NominationModel>/Zlevel} === '2' }" />
+								
+								
+								</form:content>
+						</form:SimpleForm>
+                    </content>	
+					
+                          <footer>
+					<OverflowToolbar>
+                   
+						<ToolbarSpacer />
+						
+							<Button type="Emphasized" 
+							text="Save" press="save" id="B1" visible="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/ReqType} ==='E'}"></Button>
+						<Button type="success" 
+							text="Submit" press="submit" visible="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/ReqType} ==='E'}" id="B2"></Button>
+							 <Button id="B3" visible="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/ReqType} ==='M'}"
+							text="ReferBack" type="Emphasized" press="ReferBack" ></Button>
+						<Button  visible="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/ReqType} ==='M'}" type="success"
+							text="Approve"  press="onApprove" id="B4"></Button>
+						<Button type="Reject" visible="{= ${NominationModel>/Onlydispay}!=='X' &amp;&amp; ${NominationModel>/ReqType} ==='M'}"
+							text="Reject" press="onReject" id="B5"></Button>
+						
+                            	</OverflowToolbar>
+				</footer>     
+					</Page>
+			</pages>
+		</App>
+</mvc:View>

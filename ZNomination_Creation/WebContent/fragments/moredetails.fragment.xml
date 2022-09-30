@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	 <Dialog
+		title="Nomination Details"
+		contentWidth="30%">
+		<buttons>
+		
+		
+		<button text="Close" press="close_btype" type="Reject"></button>
+	    </buttons>
+		
+		
+		<f:SimpleForm editable="true" title="Nominee's Details">
+		<f:content>
+		
+		         
+		<Label text="Nominee" design="Bold" />
+		<Text text="{btypemodel>/Zznominee1}"/>
+		<Label text="Relation" design="Bold" />
+		<Text text="{btypemodel>/Rel01}"/>
+		 <Label text="Date Of Birth" design="Bold" />
+		<Text text="{path:'btypemodel>/Dat01',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'dd/MM/yyyy' } }"
+						   		                wrapping="true" />
+		<Label text="Share" design="Bold" />
+		<Text text="{btypemodel>/Shp01}"/>
+		 
+		 <Label text="PAN No" design="Bold" />
+		 <Text text="{btypemodel>/Zzpanno1}"/> 
+		<Label text="Aadhar No" design="Bold" />
+		<Text text="{btypemodel>/Zzadharno1}"/> 
+		 <Label text="Bank Name" design="Bold" />
+		<Text text="{btypemodel>/Zzbankname1}"/> 
+		<Label text="IFSC" design="Bold"/>
+		<Text text="{btypemodel>/Zzifsc1}"/>
+		<Label text="Handicap" design="Bold" />
+		<Text text="{btypemodel>/Zzhandicap1}"/>
+			
+			<Label text="Nominee's Address" design="Bold" />
+		<Text text="{btypemodel>/Add01}"/>		
+		 <Label text="Guardians's Address" design="Bold"/>
+		<Text text="{btypemodel>/Gra01}"/>
+		</f:content>
+		
+		
+		</f:SimpleForm>
+		
+		
+		</Dialog> 
+		</core:FragmentDefinition>

@@ -1,0 +1,110 @@
+<mvc:View
+    controllerName="ZENOC.zemployeenoc.controller.Dashboard"
+    xmlns:c="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:t="sap.ui.table"
+	xmlns:tnt="sap.tnt" height="100%"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+        <Shell id="shell" class="sapUiSizeCompact">
+		<App id="app">
+			<pages>
+				<Page id="page" title="Nomination Process" class="mainUi" >
+					          <content>
+								<Panel id="p1" backgroundDesign="Translucent" visible="true" class="panelPaddingRemove"
+						headerText="">
+						
+							
+				
+				
+			
+						<Table id="idtable1" items="{Nominationheaderdata>/results}"
+						growing="true" sticky="HeaderToolbar,ColumnHeaders">
+							<headerToolbar>
+								<OverflowToolbar >
+										<!--  <Label design="Bold"  text="Nomination Items({= ${Nominationheaderdata>/}.length})"></Label>  -->
+										<SegmentedButton id="Menu" selectionChange ="authorities_select" >
+					<items>
+						<SegmentedButtonItem text="Creation" key="C" icon="sap-icon://add" />
+						<SegmentedButtonItem text="Approvals" key="A" icon="sap-icon://hr-approval" />
+						
+					</items>
+				</SegmentedButton>
+				                  <ToolbarSpacer/>
+				                  
+									<SearchField id="search" liveChange="onSearch" width="30%" />
+									<!-- <Button icon="sap-icon://synchronize"
+										press="getBackenddata" type="Transparent" /> -->
+										
+								</OverflowToolbar>
+							</headerToolbar>
+					<columns>
+						<Column  hAlign="Left">
+							<Label text="Request Number" design="Bold"/>
+						</Column>
+						<Column hAlign="Left" demandPopin="true" minScreenWidth="Tablet">
+							<Label text="Request Date" design="Bold"/>
+						</Column>
+						<Column  hAlign="Left" demandPopin="true" minScreenWidth="Tablet">
+							<Label text="Category" design="Bold"/>
+						</Column>
+						<Column  hAlign="Left" demandPopin="true" minScreenWidth="Tablet">
+							<Label text="" design="Bold"/>
+						</Column>
+						<Column hAlign="Center">
+							<Label text="Status" design="Bold"/>
+						</Column>
+						
+						<Column hAlign="Left" width="35px">
+							<Label text="" design="Bold"/>
+						</Column>
+						
+						
+						
+							</columns>
+						<items>
+						<ColumnListItem>
+							<Link text="{Nominationheaderdata>Zreqno}" press="onrequest"/>
+							<HBox class="tableDate">
+								<c:Icon src="sap-icon://appointment-2"/>
+						   		<!-- <Text text="{Nominationheaderdata>Cdate}"/> -->
+						   		<Text text="{path:'Nominationheaderdata>Cdate',type:'sap.ui.model.type.DateTime', formatOptions:{ pattern:'dd/MM/yyyy' } }"/>
+							</HBox>	
+							
+							<tnt:InfoLabel text="{Nominationheaderdata>Rtext}"
+											displayOnly="true"
+											colorScheme="{ parts: [ {path: 'Nominationheaderdata>Rtext'} ], formatter: '.categoryColor' }"
+											 />	
+											  <c:Icon src="{ parts: [ {path: 'Nominationheaderdata>Status'} ], formatter: '.statusIcon' }"
+					                         color="{ parts: [ {path: 'Nominationheaderdata>Status'} ], formatter: '.statusIconcolor' }"/>
+											 
+							<tnt:InfoLabel text="{Nominationheaderdata>Status}"
+											displayOnly="true"
+											colorScheme="{ parts: [ {path: 'Nominationheaderdata>Status'} ], formatter: '.statusColor' }"/>
+											 						
+					                        
+				                               
+							 	 <c:Icon src="sap-icon://edit" 
+											type="Transparent"  visible="{= ${Nominationheaderdata>Onlydispay}!=='X'}"/>
+							
+						</ColumnListItem>
+						</items>
+				
+				</Table>
+					</Panel>
+                       </content>
+                        <footer>
+					<OverflowToolbar>
+                   
+						<ToolbarSpacer />
+						<Button type="Emphasized" icon = "sap-icon://add"
+							text="New Request" press="create_req"
+							id="B1" visible="{= ${Nominationheaderdata>/ReqType}==='E'}"></Button>
+						
+                            	</OverflowToolbar>
+				</footer>         	
+					
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

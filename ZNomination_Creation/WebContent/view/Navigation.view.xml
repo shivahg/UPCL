@@ -1,0 +1,57 @@
+<mvc:View
+    controllerName="ZENOC.zemployeenoc.controller.Navigation"
+    xmlns:c="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:t="sap.ui.table"
+	xmlns:tnt="sap.tnt" height="100%"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml">
+        <Shell id="shell" class="sapUiSizeCompact">
+		<App id="app">
+			<pages>
+				<Page id="page" title="Nomination Creation" class="mainUi" >
+					<customHeader>
+						<Toolbar class="mainToolbar">
+							<Button  text="Nomination Creation" tooltip="Menu" press="menuButtonPress"/>
+					
+							
+							<!--<Image src="https://www.vhv.rs/dpng/d/170-1709699_download-logo-scania-png-clipart-png-download-logo.png" />-->
+							
+							<ToolbarSpacer/>
+							<!-- <Button icon="sap-icon://bell" tooltip="Notification" press="fnNotification" text="" /> -->
+							<!--<HBox>
+								<Button icon="sap-icon://customer" tooltip="Profile" text="" visible="false" press="fnProfileMenu" ariaHasPopup="Dialog"/>
+								<Avatar src="" visible="true" displaySize="XS" press=".fnProfileMenu" />
+							</HBox>-->
+						<!-- 	<Avatar src="https://he-s3.s3.amazonaws.com/media/avatars/runalenka4/resized/180/photo.jpg" visible="true" displaySize="XS" press=".fnProfileMenu" /> -->
+						<!-- <Title text="Welcome, {settings>/User/Ename}"/> -->
+						<!-- <Button icon="sap-icon://customer" text="{settings>/User/Ename}" press=".fnProfileMenu" /> -->
+						<!--	type="Transparent"-->
+						<!-- <Button icon="sap-icon://customer" text="{settings>/User/Ename}" press=".fnProfileMenu" /> -->
+						</Toolbar>
+					</customHeader>
+					<content>
+						<HBox width="100%" height="100%" class="sideNavHbox containerHBox">
+						 <tnt:SideNavigation id="sidenav" expanded="false" height="100%" class="sideNavigation" visible="false">
+					
+								<!-- 
+									<tnt:NavigationList>
+										<tnt:NavigationListItem text="Nominee" icon="sap-icon://employee" select="navtoDashboard" key="property"/>
+									</tnt:NavigationList>
+							<tnt:fixedItem>
+									<tnt:NavigationList>
+										<tnt:NavigationListItem text="Welcome {settings>/User/Ename}" icon="sap-icon://customer" select=".fnProfileMenu" enabled="true"/>
+									</tnt:NavigationList>
+								</tnt:fixedItem> -->
+							</tnt:SideNavigation>  
+							<NavContainer id="Main" defaultTransitionName="slide">
+					
+                                	
+							</NavContainer>
+						</HBox>
+					</content>
+                  
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
